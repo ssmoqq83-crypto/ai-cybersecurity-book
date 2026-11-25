@@ -1,0 +1,295 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الذكاء الاصطناعي في الأمن السيبراني | الصف الثالث المهني</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'sans-serif'],
+            display: ['Cairo', 'sans-serif']
+          },
+          colors: {
+            cyber: {
+              dark: '#070b14',
+              card: '#0e1626',
+              surface: '#142036',
+              cyan: '#06b6d4',
+              teal: '#14b8a6',
+              indigo: '#6366f1',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              rose: '#f43f5e'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    .cyber-grid-bg {
+      background-image: radial-gradient(rgba(6, 182, 212, 0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .glass-panel {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(6, 182, 212, 0.35);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(6, 182, 212, 0.6);
+    }
+    .svg-diagram-box svg {
+      width: 100%;
+      height: auto;
+      max-height: 360px;
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-cyber-dark dark:text-slate-100 transition-colors duration-300 cyber-grid-bg min-h-screen flex flex-col">
+
+  <!-- Toast Notification Banner (No alert() used anywhere) -->
+  <div id="toast-banner" class="fixed bottom-5 left-5 z-50 hidden max-w-sm rounded-2xl bg-slate-900 dark:bg-cyan-950 text-white border border-cyan-500/40 px-4 py-3 shadow-2xl text-sm font-semibold flex items-center gap-2.5 transition-all">
+    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+    <span id="toast-text">تم النسخ بنجاح</span>
+  </div>
+
+  <!-- Top Header & Navigation -->
+  <header class="sticky top-0 z-40 w-full bg-white/90 dark:bg-cyber-card/90 glass-panel border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 gap-2">
+        <!-- Brand Logo -->
+        <button onclick="navigateTo('home')" class="flex items-center gap-3 text-right group focus:outline-none">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-teal-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+          </div>
+          <div>
+            <div class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+              الذكاء الاصطناعي في الأمن السيبراني
+            </div>
+            <div class="text-[11px] text-cyan-600 dark:text-cyan-400 font-semibold">
+              الصف الثالث المهني • التعليم المهني • 2026م
+            </div>
+          </div>
+        </button>
+
+        <!-- Desktop Nav Links -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <button data-nav="home" onclick="navigateTo('home')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الرئيسية</button>
+          <button data-nav="chapters" onclick="navigateTo('chapters')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الفصول (1-6)</button>
+          <button data-nav="exams" onclick="navigateTo('exams')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الاختبارات</button>
+          <button data-nav="diagrams" onclick="navigateTo('diagrams')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الرسومات</button>
+          <button data-nav="qa" onclick="navigateTo('qa')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الأسئلة المحلولة</button>
+          <button data-nav="sources" onclick="navigateTo('sources')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">المصادر</button>
+        </nav>
+
+        <!-- Right Controls: Search Trigger + Theme Toggle + Mobile Menu -->
+        <div class="flex items-center gap-2">
+          <button onclick="toggleSearchModal()" title="بحث فوري في الكتاب" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/15 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
+            </svg>
+          </button>
+
+          <button onclick="toggleTheme()" title="تبديل الوضع الليلي / النهاري" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-amber-500/15 hover:text-amber-500 transition-colors">
+            <!-- Sun Icon (shown in dark mode) -->
+            <svg id="sun-icon" class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-12.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.95 7.95l-.71-.71M6.34 6.34l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <!-- Moon Icon (shown in light mode) -->
+            <svg id="moon-icon" class="w-5 h-5 block dark:hidden text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
+          </button>
+
+          <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200" aria-label="القائمة">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-menu" class="lg:hidden hidden pb-4 pt-2 border-t border-slate-200 dark:border-slate-800 grid grid-cols-2 sm:grid-cols-3 gap-2">
+        <button data-nav="home" onclick="navigateTo('home'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الرئيسية</button>
+        <button data-nav="chapters" onclick="navigateTo('chapters'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الفصول (1-6)</button>
+        <button data-nav="exams" onclick="navigateTo('exams'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الاختبارات</button>
+        <button data-nav="diagrams" onclick="navigateTo('diagrams'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الرسومات</button>
+        <button data-nav="qa" onclick="navigateTo('qa'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الأسئلة المحلولة</button>
+        <button data-nav="sources" onclick="navigateTo('sources'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">المصادر</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Instant Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-start justify-center pt-16 px-4">
+    <div class="w-full max-w-2xl rounded-3xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
+        <svg class="w-5 h-5 text-cyan-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
+        </svg>
+        <input id="global-search-input" oninput="performGlobalSearch(this.value)" type="text" placeholder="ابحث في الفصول، المفاهيم، الرسومات، الأسئلة، أو المصادر..." class="w-full bg-transparent text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none text-sm sm:text-base" />
+        <button onclick="toggleSearchModal()" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300">إغلاق</button>
+      </div>
+      <div id="search-results" class="max-h-96 overflow-y-auto p-4 space-y-2.5 text-sm">
+        <div class="text-center text-slate-500 dark:text-slate-400 py-8">
+          اكتب كلمة مفتاحية مثل: <span class="text-cyan-500 font-bold">SIEM</span> أو <span class="text-cyan-500 font-bold">التعلم الفيدرالي</span> أو <span class="text-cyan-500 font-bold">CIA</span> أو <span class="text-cyan-500 font-bold">SOAR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dynamic Content Container -->
+  <main id="app-content" class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <!-- Rendered via JavaScript -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-cyber-card border-t border-slate-200 dark:border-slate-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-4">
+      <div class="p-4 rounded-2xl bg-gradient-to-l from-cyan-500/10 via-indigo-500/10 to-teal-500/10 border border-cyan-500/30 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+        <div class="inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-cyan-700 dark:text-cyan-300">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+          <span>تم الإنشاء بواسطة الطالب مقتدى صفاء علي</span>
+        </div>
+        <span class="hidden sm:inline text-slate-400">•</span>
+        <div class="inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-indigo-700 dark:text-indigo-300">
+          <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+          <span>والمشرف عليه الأستاذ إيهاب إبراهيم</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+        <div class="text-center sm:text-right">
+          <span class="font-bold text-slate-900 dark:text-white">وزارة التربية - المديرية العامة للتعليم المهني</span>
+          <span> • كتاب الذكاء الاصطناعي في الأمن السيبراني (الصف الثالث - الطبعة الأولى 2026م / 1447هـ)</span>
+        </div>
+        <div class="flex items-center gap-4 font-semibold">
+          <button onclick="navigateTo('chapters')" class="hover:text-cyan-500 transition-colors">الفصول</button>
+          <button onclick="navigateTo('exams')" class="hover:text-cyan-500 transition-colors">الاختبارات</button>
+          <button onclick="navigateTo('qa')" class="hover:text-cyan-500 transition-colors">الأسئلة المحلولة</button>
+          <button onclick="navigateTo('sources')" class="hover:text-cyan-500 transition-colors">المصادر</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================================
+       DATA LAYER: COMPLETE BOOK CONTENT, DIAGRAMS, QUESTIONS, EXAMS, SOURCES
+       ========================================================================= */
+
+    const BOOK_META = {
+      title: "الذكاء الاصطناعي في الأمن السيبراني",
+      grade: "الصف الثالث المهني — اختصاص الأمن السيبراني (فرع الحاسوب وتقنية المعلومات)",
+      authority: "جمهورية العراق — وزارة التربية — المديرية العامة للتعليم المهني",
+      edition: "الطبعة الأولى — 2026م / 1447هـ",
+      authors: [
+        "أ.م.د إسماعيل خليل علي",
+        "أ. د. بشار مكي نعمة",
+        "م. حسين قحطان خلف",
+        "أ. د. رفعت زيدان خلف"
+      ],
+      typographer: "فاتن حميد وادي",
+      totalPages: 90,
+      preface: `في عصر تتسارع فيه التحولات الرقمية ويتنامى فيه اعتماد المجتمعات على التكنولوجيا، أصبح الأمن السيبراني عنصراً لا غنى عنه في حماية الأفراد والمؤسسات والدول من التهديدات الرقمية المتطورة. ومع تطور الشبكات والأنظمة الحاسوبية واتساع رقعة الاعتماد على الإنترنت في نواحي الحياة جميعاً، برز تحدٍ جديد يتمثل في قدرة المهاجمين على استخدام تقنيات متقدمة لتنفيذ هجمات ذكية ومنظمة، مما استدعى تطوير أدوات دفاعية أكثر فعالية وذكاءً.
+
+في هذا السياق، ظهر الذكاء الاصطناعي كأحد أهم الأدوات الثورية التي تجمع بين القدرة على التعلم الذاتي وتحليل البيانات بسرعة فائقة، مما يمنح منظومات الأمن السيبراني قدرة غير مسبوقة على رصد الهجمات، والتنبؤ بالتهديدات، والاستجابة لها بشكل فوري. لقد أصبح الذكاء الاصطناعي جزءاً لا يتجزأ من بنية الأمن السيبراني الحديثة، نظراً لما يوفره من إمكانات تحليل أنماط السلوك المشبوه، وتمييز البيانات المشبوهة عن البيانات السليمة، والتعامل مع الكم الهائل من الأحداث الرقمية دون تدخل بشري مباشر.
+
+يهدف هذا الكتاب المنهجي إلى تزويد طلاب الصف الثالث المهني في تخصص الأمن السيبراني بأسس ومعارف متقدمة بشأن كيفية دمج تقنيات الذكاء الاصطناعي في مجال الأمن السيبراني، مع ربط المفاهيم النظرية بالتطبيقات العملية وفهم التحديات الأخلاقية والقانونية وحماية الخصوصية، بحيث يبقى الذكاء الاصطناعي أداة مساعدة للإنسان لا بديلاً عنه وتخضع قراراته المهمة للمراجعة البشرية دوماً.`,
+      generalGoals: [
+        "تزويد طلاب الصف الثالث المهني في اختصاص الأمن السيبراني بأسس ومعارف متقدمة لدمج تقنيات الذكاء الاصطناعي في حماية الأنظمة والشبكات.",
+        "الربط بين المفاهيم النظرية والتطبيقات العملية في رصد الهجمات والتنبؤ بالتهديدات وأتمتة الاستجابة للحوادث السيبرانية.",
+        "تنمية مهارات إعداد البيانات وتدريب النماذج وتقييم أدائها وتوظيف التنقيب في البيانات وتحليلات البيانات الضخمة.",
+        "فهم التحديات التقنية والأمنية والأخلاقية والقانونية والخصوصية المرتبطة بأنظمة الذكاء الاصطناعي في الأمن السيبراني.",
+        "استكشاف التوجهات المستقبلية مثل الذكاء الاصطناعي التوليدي (GPT)، إنترنت الأشياء (IoT)، التعلم العميق، والذكاء الاصطناعي القابل للتفسير (XAI)."
+      ]
+    };
+
+    const CHAPTERS = [
+      {
+        id: 1,
+        number: "الفصل الأول",
+        title: "مقدمة في الذكاء الاصطناعي",
+        pages: "7 - 21",
+        badge: "الأسس والمفاهيم",
+        objectives: [
+          "تعريف الطالب بمفهوم الذكاء الاصطناعي وأهميته في تحسين الكفاءة وتبسيط العمليات في مجالات متعددة.",
+          "اكتساب نظرة على مراحل تطور الذكاء الاصطناعي وأهم المحطات التاريخية التي شكلت مساره.",
+          "التعرف على كيفية استخدام الذكاء الاصطناعي في مختلف المجالات وفي الأمن السيبراني.",
+          "التعرف على أهم المبادئ الأساسية للذكاء الاصطناعي: البحث، التعلم، الاستدلال، تمثيل المعرفة، التخطيط.",
+          "التعرف على أهمية البيانات في تدريب وتحسين نماذج الذكاء الاصطناعي وأنواعها حسب التنظيم."
+        ],
+        sections: [
+          {
+            code: "1-1",
+            title: "المفهوم العام للذكاء الاصطناعي وأهمية استخدامه",
+            body: `الذكاء الاصطناعي (Artificial Intelligence - AI) هو أحد فروع علوم الحاسوب، ويهتم بإنشاء أنظمة قادرة على تنفيذ مهام ترتبط عادةً بالذكاء البشري مثل الاستدلال والتعلم وحل المشكلات والإدراك واتخاذ القرارات. يجمع بين التعلم الآلي ومعالجة اللغة الطبيعية والرؤية الحاسوبية والروبوتات وتمثيل المعرفة. يتجاوز قيود أنظمة الحماية التقليدية عبر التعرف المستمر على الأنماط، وتحليل التنبيهات والسجلات، وتحديد الأولويات، وتسريع الاستجابة في الوقت شبه الحقيقي مع ضرورة حماية أنظمة الذكاء الاصطناعي نفسها من الخداع والتلاعب.`
+          },
+          {
+            code: "1-1-1",
+            title: "حالات استخدام الذكاء الاصطناعي في الأمن السيبراني",
+            body: `أبرز سبع حالات استخدام:
+1. اكتشاف التهديدات: تحليل البيانات واكتشاف الأنشطة غير الطبيعية والتهديدات السيبرانية.
+2. اكتشاف البرمجيات الخبيثة: التعرف على البرمجيات الخبيثة والحد من تأثيرها.
+3. كشف عمليات التسلل: مراقبة الشبكات واكتشاف محاولات الدخول غير المصرح بها في أنظمة كشف ومنع التسلل.
+4. اكتشاف هجمات حجب الخدمة (DoS / DDoS): التعرف على الأنشطة غير الطبيعية الناتجة عنها.
+5. تقييم نقاط الضعف: المساعدة في تحديد نقاط الضعف والمخاطر التي قد تستغلها الهجمات.
+6. الاستجابة للتهديدات: تحليل التنبيهات الأمنية وتحديد أولوياتها وتسريع الاستجابة للحوادث.
+7. التحقيق الجنائي الرقمي: تحليل البيانات المرتبطة بالحوادث الأمنية للمساعدة في التحقيق فيها.`
+          },
+          {
+            code: "1-1-2",
+            title: "التهديدات والثغرات والمخاطر وثلاثية أمن المعلومات (CIA Triad)",
+            body: `الأمن السيبراني (Cybersecurity) يسعى لتحقيق ثلاثية أمن المعلومات (CIA Triad): السرية (Confidentiality) بعدم اطلاع غير المصرح لهم، والسلامة (Integrity) بضمان عدم التعديل دون تخويل، والتوافر (Availability) ببقاء المعلومات والخدمات متاحة عند الحاجة.
+• التهديد (Threat): ظرف أو حدث لديه القدرة على إلحاق الضرر بالأنظمة أو البيانات أو العمليات (مثل البرمجيات الخبيثة، الفدية، التصيد، DDoS، التهديدات الداخلية، الهجمات الخصمية وتسميم البيانات).
+• الثغرة الأمنية (Vulnerability): نقطة ضعف أو خلل في النظام يمكن استغلاله (في البرمجيات، الشبكات، التطبيقات، الإعدادات، أو بيانات التدريب).
+• المخاطر (Risk): احتمال حدوث ضرر أو خسارة نتيجة استغلال تهديد لثغرة أمنية؛ فالتهديد يستغل الثغرة واجتماعهما يولد المخاطرة.`
+          },
+          {
+            code: "1-1-3",
+            title: "المعلومات المضللة ودور الذكاء الاصطناعي فيها",
+            body: `المعلومات المضللة هي معلومات كاذبة أو غير دقيقة تهدف إلى خداع الأشخاص عبر إخفاء الحقيقة أو تشويهها. وتشمل أشكالها: الإشاعة (Rumor)، الأخبار الكاذبة (Fake News)، الرسائل غير المرغوب فيها (Spam)، التضليل المتعمد (Disinformation)، والمعلومات الخاطئة (False Information). قد يستغل المهاجم الذكاء الاصطناعي لصياغة رسائل أكثر إقناعاً أو توليد صوت وصورة تنتحل هوية شخص.`
+          },
+          {
+            code: "1-1-4 & 1-1-5",
+            title: "أنواع الهجمات السيبرانية ودور الذكاء الاصطناعي في اكتشاف الثغرات (OWASP)",
+            body: `من أنواع الهجمات السيبرانية: البرمجيات الخبيثة (الفيروسات، الديدان، أحصنة طروادة)، التصيد الاحتيالي (الاحتيال عبر البريد، الصيد الموجه Spear Phishing)، برامج الفدية (Ransomware)، هجمات حجب الخدمة الموزعة (DDoS وشبكات Botnets)، هجوم الوسيط (Man-in-the-Middle)، وحقن SQL (SQL Injection).
+يساعد الذكاء الاصطناعي المختص الأمني في اكتشاف الثغرات عبر 3 طرائق: الفحص الآلي، اكتشاف الأنماط غير الطبيعية، وترتيب الأولويات — ومنها ثغرات قائمة OWASP العشر (ضعف التحكم في الوصول، سوء الإعداد الأمني، إخفاقات سلسلة التوريد، الإخفاقات التشفيرية، الحقن، التصميم غير الآمن، إخفاقات المصادقة، إخفاقات سلامة البرمجيات/البيانات، إخفاقات التسجيل والتنبيه، وسوء التعامل مع الحالات الاستثنائية).`
+          },
+          {
+            code: "1-1-6 & 1-2",
+            title: "فوائد ومخاطر الذكاء الاصطناعي والتطور التاريخي",
+            body: `الفوائد: اكتشاف التهديدات بسرعة، الاستجابة الآلية، تحليل كميات كبيرة من البيانات، التعلم المستمر والتطور، وتقليل التكاليف والجهد البشري. المخاطر:
