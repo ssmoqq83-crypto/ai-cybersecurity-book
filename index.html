@@ -5,291 +5,2223 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>الذكاء الاصطناعي في الأمن السيبراني | الصف الثالث المهني</title>
+  <!-- تحميل Tailwind CSS للتصميم السريع والمتجاوب -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- خطوط عربية حديثة وعالية الوضوح -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Cairo', 'Tajawal', 'sans-serif'],
-            display: ['Cairo', 'sans-serif']
+            sans: ['Cairo', 'Segoe UI', 'Tahoma', 'Arial', 'sans-serif'],
           },
           colors: {
-            cyber: {
-              dark: '#070b14',
-              card: '#0e1626',
-              surface: '#142036',
-              cyan: '#06b6d4',
-              teal: '#14b8a6',
-              indigo: '#6366f1',
-              emerald: '#10b981',
-              amber: '#f59e0b',
-              rose: '#f43f5e'
-            }
-          }
-        }
-      }
+            cyberbg: '#070B14',
+            cybersurface: '#0D1424',
+            cyberaccent: '#38BDF8',
+            cyberemerald: '#10B981',
+          },
+        },
+      },
     };
   </script>
+
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      color-scheme: dark;
     }
+
     body {
-      font-family: 'Cairo', 'Tajawal', sans-serif;
+      font-family: 'Cairo', 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+      background-color: #070B14;
+      color: #F1F5F9;
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
-    .cyber-grid-bg {
-      background-image: radial-gradient(rgba(6, 182, 212, 0.12) 1px, transparent 1px);
-      background-size: 24px 24px;
+
+    /* خلفية أساسية هادئة وعميقة */
+    .cyber-backdrop {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 45%),
+        #070B14;
     }
-    .glass-panel {
+
+    /* بطاقات زجاجية نظيفة وعالية التباين */
+    .glass-card {
+      background: rgba(13, 20, 36, 0.78);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.13);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
     }
-    /* Custom scrollbar */
+
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 14px 32px -12px rgba(56, 189, 248, 0.14);
+    }
+
+    /* حاوية الشعار التفاعلي ثلاثي الأبعاد */
+    .shield-stage {
+      perspective: 900px;
+    }
+
+    .shield-interactive {
+      transform-style: preserve-3d;
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    /* نبض هادئ جداً لعقدة الذكاء الاصطناعي داخل الدرع */
+    @keyframes gentlePulse {
+      0%, 100% {
+        opacity: 0.75;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.06);
+      }
+    }
+
+    .ai-core-pulse {
+      transform-origin: center;
+      animation: gentlePulse 3.6s ease-in-out infinite;
+    }
+
+    @keyframes ringRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .ai-orbit-slow {
+      transform-origin: center;
+      animation: ringRotate 26s linear infinite;
+    }
+
+    @keyframes viewEnter {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-view {
+      animation: viewEnter 0.26s ease-out both;
+    }
+
+    /* شريط تمرير مخصص */
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
     }
     ::-webkit-scrollbar-track {
-      background: transparent;
+      background: #070B14;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(6, 182, 212, 0.35);
+      background: #1E293B;
       border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(6, 182, 212, 0.6);
-    }
-    .svg-diagram-box svg {
-      width: 100%;
-      height: auto;
-      max-height: 360px;
-      display: block;
+      background: #334155;
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-cyber-dark dark:text-slate-100 transition-colors duration-300 cyber-grid-bg min-h-screen flex flex-col">
+<body class="cyber-backdrop min-h-screen flex flex-col selection:bg-sky-400/30 selection:text-sky-100">
 
-  <!-- Toast Notification Banner (No alert() used anywhere) -->
-  <div id="toast-banner" class="fixed bottom-5 left-5 z-50 hidden max-w-sm rounded-2xl bg-slate-900 dark:bg-cyan-950 text-white border border-cyan-500/40 px-4 py-3 shadow-2xl text-sm font-semibold flex items-center gap-2.5 transition-all">
-    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
-    <span id="toast-text">تم النسخ بنجاح</span>
-  </div>
-
-  <!-- Top Header & Navigation -->
-  <header class="sticky top-0 z-40 w-full bg-white/90 dark:bg-cyber-card/90 glass-panel border-b border-slate-200 dark:border-slate-800 shadow-sm">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 gap-2">
-        <!-- Brand Logo -->
-        <button onclick="navigateTo('home')" class="flex items-center gap-3 text-right group focus:outline-none">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-teal-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-            </svg>
-          </div>
-          <div>
-            <div class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-              الذكاء الاصطناعي في الأمن السيبراني
-            </div>
-            <div class="text-[11px] text-cyan-600 dark:text-cyan-400 font-semibold">
-              الصف الثالث المهني • التعليم المهني • 2026م
-            </div>
-          </div>
-        </button>
-
-        <!-- Desktop Nav Links -->
-        <nav class="hidden lg:flex items-center gap-1">
-          <button data-nav="home" onclick="navigateTo('home')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الرئيسية</button>
-          <button data-nav="chapters" onclick="navigateTo('chapters')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الفصول (1-6)</button>
-          <button data-nav="exams" onclick="navigateTo('exams')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الاختبارات</button>
-          <button data-nav="diagrams" onclick="navigateTo('diagrams')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الرسومات</button>
-          <button data-nav="qa" onclick="navigateTo('qa')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">الأسئلة المحلولة</button>
-          <button data-nav="sources" onclick="navigateTo('sources')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold transition-all">المصادر</button>
-        </nav>
-
-        <!-- Right Controls: Search Trigger + Theme Toggle + Mobile Menu -->
-        <div class="flex items-center gap-2">
-          <button onclick="toggleSearchModal()" title="بحث فوري في الكتاب" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/15 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
-            </svg>
-          </button>
-
-          <button onclick="toggleTheme()" title="تبديل الوضع الليلي / النهاري" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-amber-500/15 hover:text-amber-500 transition-colors">
-            <!-- Sun Icon (shown in dark mode) -->
-            <svg id="sun-icon" class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-12.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.95 7.95l-.71-.71M6.34 6.34l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-            <!-- Moon Icon (shown in light mode) -->
-            <svg id="moon-icon" class="w-5 h-5 block dark:hidden text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-            </svg>
-          </button>
-
-          <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200" aria-label="القائمة">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+  <!-- شريط التنقل العلوي الثابت (Sticky Glass Navbar) -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-[#070B14]/88 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-2">
+      <!-- شعار مصغر وعنوان المنصة -->
+      <button type="button" onclick="navigateTo('home')" class="flex items-center gap-3 text-right group rounded-xl focus:outline-none">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400/20 to-emerald-400/20 border border-sky-400/35 flex items-center justify-center text-sky-300 shrink-0 group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2.8l7.2 3.1v5.8c0 4.7-3.1 8.7-7.2 10.1-4.1-1.4-7.2-5.4-7.2-10.1V5.9L12 2.8z" />
+            <circle cx="12" cy="11.2" r="2.3" />
+            <path d="M12 13.5v3.4M9.4 9.5L7.8 8M14.6 9.5L16.2 8" />
+          </svg>
         </div>
-      </div>
+        <div>
+          <div class="text-sm sm:text-base font-extrabold text-white leading-tight">الذكاء الاصطناعي في الأمن السيبراني</div>
+          <div class="text-[11px] text-sky-300/85 font-medium">الصف الثالث المهني • اختصاص الأمن السيبراني</div>
+        </div>
+      </button>
 
-      <!-- Mobile Navigation Drawer -->
-      <div id="mobile-menu" class="lg:hidden hidden pb-4 pt-2 border-t border-slate-200 dark:border-slate-800 grid grid-cols-2 sm:grid-cols-3 gap-2">
-        <button data-nav="home" onclick="navigateTo('home'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الرئيسية</button>
-        <button data-nav="chapters" onclick="navigateTo('chapters'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الفصول (1-6)</button>
-        <button data-nav="exams" onclick="navigateTo('exams'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الاختبارات</button>
-        <button data-nav="diagrams" onclick="navigateTo('diagrams'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الرسومات</button>
-        <button data-nav="qa" onclick="navigateTo('qa'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">الأسئلة المحلولة</button>
-        <button data-nav="sources" onclick="navigateTo('sources'); toggleMobileMenu()" class="nav-btn px-3 py-2.5 rounded-xl text-sm font-bold text-center">المصادر</button>
+      <!-- قائمة التنقل لسطح المكتب -->
+      <nav aria-label="التنقل الرئيسي" class="hidden lg:flex items-center gap-1.5">
+        <button type="button" data-nav="home" onclick="navigateTo('home')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:bg-slate-800/80 transition-colors">الرئيسية</button>
+        <button type="button" data-nav="chapters" onclick="navigateTo('chapters')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-sky-300 hover:bg-slate-800/80 transition-colors">الفصول الدراسية</button>
+        <button type="button" data-nav="tests" onclick="navigateTo('tests')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-emerald-300 hover:bg-emerald-500/15 border border-emerald-500/25 transition-colors">الاختبارات التفاعلية</button>
+        <button type="button" data-nav="figures" onclick="navigateTo('figures')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-sky-300 hover:bg-sky-500/15 border border-sky-500/25 transition-colors">الرسومات التوضيحية</button>
+        <button type="button" data-nav="qa" onclick="navigateTo('qa')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-amber-300 hover:bg-amber-500/15 border border-amber-500/25 transition-colors">الأسئلة المحلولة</button>
+        <button type="button" data-nav="refs" onclick="navigateTo('refs')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:bg-slate-800 border border-slate-700/80 transition-colors">المصادر</button>
+      </nav>
+
+      <!-- زر القائمة للهواتف والأجهزة اللوحية -->
+      <button type="button" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="فتح القائمة" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-200 hover:border-sky-400/50">
+        <svg id="menuIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- قائمة التنقل المنسدلة للهواتف -->
+    <div id="mobileMenu" class="lg:hidden hidden border-t border-slate-800/80 bg-[#070B14]/95 px-4 py-3">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+        <button type="button" data-nav="home" onclick="navigateAndClose('home')" class="nav-btn px-3 py-2.5 rounded-xl text-xs font-bold text-right bg-slate-900/90 border border-slate-800 text-slate-200">الرئيسية</button>
+        <button type="button" data-nav="chapters" onclick="navigateAndClose('chapters')" class="nav-btn px-3 py-2.5 rounded-xl text-xs font-bold text-right bg-slate-900/90 border border-slate-800 text-sky-300">الفصول الدراسية</button>
+        <button type="button" data-nav="tests" onclick="navigateAndClose('tests')" class="nav-btn px-3 py-2.5 rounded-xl text-xs font-bold text-right bg-emerald-950/40 border border-emerald-500/30 text-emerald-300">الاختبارات التفاعلية</button>
+        <button type="button" data-nav="figures" onclick="navigateAndClose('figures')" class="nav-btn px-3 py-2.5 rounded-xl text-xs font-bold text-right bg-sky-950/40 border border-sky-500/30 text-sky-300">الرسومات التوضيحية</button>
+        <button type="button" data-nav="qa" onclick="navigateAndClose('qa')" class="nav-btn px-3 py-2.5 rounded-xl text-xs font-bold text-right bg-amber-950/40 border border-amber-500/30 text-amber-300">الأسئلة المحلولة</button>
+        <button type="button" data-nav="refs" onclick="navigateAndClose('refs')" class="nav-btn px-3 py-2.5 rounded-xl text-xs font-bold text-right bg-slate-900/90 border border-slate-800 text-slate-200">المصادر</button>
       </div>
     </div>
   </header>
 
-  <!-- Instant Search Modal -->
-  <div id="search-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-start justify-center pt-16 px-4">
-    <div class="w-full max-w-2xl rounded-3xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden">
-      <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
-        <svg class="w-5 h-5 text-cyan-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
-        </svg>
-        <input id="global-search-input" oninput="performGlobalSearch(this.value)" type="text" placeholder="ابحث في الفصول، المفاهيم، الرسومات، الأسئلة، أو المصادر..." class="w-full bg-transparent text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none text-sm sm:text-base" />
-        <button onclick="toggleSearchModal()" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300">إغلاق</button>
-      </div>
-      <div id="search-results" class="max-h-96 overflow-y-auto p-4 space-y-2.5 text-sm">
-        <div class="text-center text-slate-500 dark:text-slate-400 py-8">
-          اكتب كلمة مفتاحية مثل: <span class="text-cyan-500 font-bold">SIEM</span> أو <span class="text-cyan-500 font-bold">التعلم الفيدرالي</span> أو <span class="text-cyan-500 font-bold">CIA</span> أو <span class="text-cyan-500 font-bold">SOAR</span>
+  <!-- شريط إشعار تفاعلي لطيف بديل عن alert() -->
+  <div id="toastBanner" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden max-w-md w-[92%] px-4 py-3 rounded-2xl bg-slate-900/95 border border-sky-400/50 text-sky-100 text-xs sm:text-sm font-semibold shadow-2xl items-center justify-between gap-3">
+    <span id="toastMessage">تم النسخ بنجاح</span>
+    <button type="button" onclick="hideToast()" class="text-slate-400 hover:text-white text-xs px-2.5 py-1 rounded-lg bg-slate-800">إغلاق</button>
+  </div>
+
+  <!-- الحاوية الرئيسية للصفحات -->
+  <main id="appContainer" class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-5 sm:py-8">
+    <!-- يتم حقن المحتوى ديناميكياً عبر JavaScript -->
+  </main>
+
+  <!-- نافذة تكبير الرسم التوضيحي (Lightbox Modal) -->
+  <div id="figureModal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-sm items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modalFigureTitle">
+    <div class="glass-card rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-sky-400/35">
+      <div class="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 border-b border-slate-800 bg-slate-900/85">
+        <div>
+          <span id="modalFigureChapter" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/25"></span>
+          <h3 id="modalFigureTitle" class="text-sm sm:text-lg font-extrabold text-white mt-1"></h3>
         </div>
+        <button type="button" onclick="closeFigureModal()" class="p-2 rounded-xl bg-slate-800 hover:bg-rose-500/20 text-slate-300 hover:text-rose-300 border border-slate-700">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
+      <div id="modalFigureBody" class="p-4 sm:p-6 overflow-y-auto flex-1 bg-slate-950/70"></div>
+      <div id="modalFigureCaption" class="px-4 sm:px-6 py-3.5 border-t border-slate-800 bg-slate-900/75 text-xs sm:text-sm text-slate-300 leading-relaxed"></div>
     </div>
   </div>
 
-  <!-- Main Dynamic Content Container -->
-  <main id="app-content" class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
-    <!-- Rendered via JavaScript -->
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-white dark:bg-cyber-card border-t border-slate-200 dark:border-slate-800 mt-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-4">
-      <div class="p-4 rounded-2xl bg-gradient-to-l from-cyan-500/10 via-indigo-500/10 to-teal-500/10 border border-cyan-500/30 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
-        <div class="inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-cyan-700 dark:text-cyan-300">
-          <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
-          <span>تم الإنشاء بواسطة الطالب مقتدى صفاء علي</span>
+  <!-- التذييل (Footer) مع الإسناد الواضح -->
+  <footer class="border-t border-slate-800/80 bg-[#050811] mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-7 space-y-4">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <p class="text-sm sm:text-base font-extrabold text-sky-300">
+            إعداد الطالب: مقتدى صفاء علي — إشراف الأستاذ: إيهاب إبراهيم
+          </p>
+          <p class="text-xs text-slate-400 mt-1">
+            منصة تعليمية تفاعلية لمنهج كتاب (الذكاء الاصطناعي في الأمن السيبراني) — الصف الثالث المهني، اختصاص الأمن السيبراني، فرع الحاسوب وتقنية المعلومات.
+          </p>
         </div>
-        <span class="hidden sm:inline text-slate-400">•</span>
-        <div class="inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-indigo-700 dark:text-indigo-300">
-          <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-          <span>والمشرف عليه الأستاذ إيهاب إبراهيم</span>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="navigateTo('home')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80">الرئيسية</button>
+          <button type="button" onclick="navigateTo('chapters')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/30">الفصول</button>
+          <button type="button" onclick="navigateTo('tests')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30">الاختبارات</button>
+          <button type="button" onclick="navigateTo('figures')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/30">الرسومات</button>
+          <button type="button" onclick="navigateTo('qa')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30">الأسئلة المحلولة</button>
         </div>
       </div>
-
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-        <div class="text-center sm:text-right">
-          <span class="font-bold text-slate-900 dark:text-white">وزارة التربية - المديرية العامة للتعليم المهني</span>
-          <span> • كتاب الذكاء الاصطناعي في الأمن السيبراني (الصف الثالث - الطبعة الأولى 2026م / 1447هـ)</span>
-        </div>
-        <div class="flex items-center gap-4 font-semibold">
-          <button onclick="navigateTo('chapters')" class="hover:text-cyan-500 transition-colors">الفصول</button>
-          <button onclick="navigateTo('exams')" class="hover:text-cyan-500 transition-colors">الاختبارات</button>
-          <button onclick="navigateTo('qa')" class="hover:text-cyan-500 transition-colors">الأسئلة المحلولة</button>
-          <button onclick="navigateTo('sources')" class="hover:text-cyan-500 transition-colors">المصادر</button>
-        </div>
+      <div class="pt-3 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500">
+        <span>المديرية العامة للتعليم المهني — العراق • الطبعة الأولى 2026م - 1447هـ</span>
+        <span>مصمم بهوية بصرية تفاعلية سريعة وخفيفة على الحاسوب والهاتف</span>
       </div>
     </div>
   </footer>
 
   <script>
-    /* =========================================================================
-       DATA LAYER: COMPLETE BOOK CONTENT, DIAGRAMS, QUESTIONS, EXAMS, SOURCES
-       ========================================================================= */
-
+    /**
+     * بيانات منهج كتاب: الذكاء الاصطناعي في الأمن السيبراني
+     */
     const BOOK_META = {
-      title: "الذكاء الاصطناعي في الأمن السيبراني",
-      grade: "الصف الثالث المهني — اختصاص الأمن السيبراني (فرع الحاسوب وتقنية المعلومات)",
-      authority: "جمهورية العراق — وزارة التربية — المديرية العامة للتعليم المهني",
-      edition: "الطبعة الأولى — 2026م / 1447هـ",
+      title: 'الذكاء الاصطناعي في الأمن السيبراني',
+      subtitle: 'الصف الثالث المهني • اختصاص الأمن السيبراني • فرع الحاسوب وتقنية المعلومات',
+      tagline: 'منصة تعليمية تفاعلية تجمع بين مفاهيم الذكاء الاصطناعي وأنظمة الدفاع السيبراني الحديثة، مع اختبارات ذكية، مخططات توضيحية، وأسئلة محلولة.',
+      attribution: 'إعداد الطالب: مقتدى صفاء علي | إشراف الأستاذ: إيهاب إبراهيم',
+      edition: 'الطبعة الأولى 2026م - 1447هـ',
+      ministry: 'المديرية العامة للتعليم المهني — المديرية العامة للمناهج • العراق',
       authors: [
-        "أ.م.د إسماعيل خليل علي",
-        "أ. د. بشار مكي نعمة",
-        "م. حسين قحطان خلف",
-        "أ. د. رفعت زيدان خلف"
+        'أ.م.د إسماعيل خليل علي',
+        'أ. د. بشار مكي نعمة',
+        'م. حسين قحطان خلف',
+        'أ. د. رفعت زيدان خلف',
       ],
-      typographer: "فاتن حميد وادي",
-      totalPages: 90,
-      preface: `في عصر تتسارع فيه التحولات الرقمية ويتنامى فيه اعتماد المجتمعات على التكنولوجيا، أصبح الأمن السيبراني عنصراً لا غنى عنه في حماية الأفراد والمؤسسات والدول من التهديدات الرقمية المتطورة. ومع تطور الشبكات والأنظمة الحاسوبية واتساع رقعة الاعتماد على الإنترنت في نواحي الحياة جميعاً، برز تحدٍ جديد يتمثل في قدرة المهاجمين على استخدام تقنيات متقدمة لتنفيذ هجمات ذكية ومنظمة، مما استدعى تطوير أدوات دفاعية أكثر فعالية وذكاءً.
-
-في هذا السياق، ظهر الذكاء الاصطناعي كأحد أهم الأدوات الثورية التي تجمع بين القدرة على التعلم الذاتي وتحليل البيانات بسرعة فائقة، مما يمنح منظومات الأمن السيبراني قدرة غير مسبوقة على رصد الهجمات، والتنبؤ بالتهديدات، والاستجابة لها بشكل فوري. لقد أصبح الذكاء الاصطناعي جزءاً لا يتجزأ من بنية الأمن السيبراني الحديثة، نظراً لما يوفره من إمكانات تحليل أنماط السلوك المشبوه، وتمييز البيانات المشبوهة عن البيانات السليمة، والتعامل مع الكم الهائل من الأحداث الرقمية دون تدخل بشري مباشر.
-
-يهدف هذا الكتاب المنهجي إلى تزويد طلاب الصف الثالث المهني في تخصص الأمن السيبراني بأسس ومعارف متقدمة بشأن كيفية دمج تقنيات الذكاء الاصطناعي في مجال الأمن السيبراني، مع ربط المفاهيم النظرية بالتطبيقات العملية وفهم التحديات الأخلاقية والقانونية وحماية الخصوصية، بحيث يبقى الذكاء الاصطناعي أداة مساعدة للإنسان لا بديلاً عنه وتخضع قراراته المهمة للمراجعة البشرية دوماً.`,
-      generalGoals: [
-        "تزويد طلاب الصف الثالث المهني في اختصاص الأمن السيبراني بأسس ومعارف متقدمة لدمج تقنيات الذكاء الاصطناعي في حماية الأنظمة والشبكات.",
-        "الربط بين المفاهيم النظرية والتطبيقات العملية في رصد الهجمات والتنبؤ بالتهديدات وأتمتة الاستجابة للحوادث السيبرانية.",
-        "تنمية مهارات إعداد البيانات وتدريب النماذج وتقييم أدائها وتوظيف التنقيب في البيانات وتحليلات البيانات الضخمة.",
-        "فهم التحديات التقنية والأمنية والأخلاقية والقانونية والخصوصية المرتبطة بأنظمة الذكاء الاصطناعي في الأمن السيبراني.",
-        "استكشاف التوجهات المستقبلية مثل الذكاء الاصطناعي التوليدي (GPT)، إنترنت الأشياء (IoT)، التعلم العميق، والذكاء الاصطناعي القابل للتفسير (XAI)."
-      ]
     };
 
     const CHAPTERS = [
       {
-        id: 1,
-        number: "الفصل الأول",
-        title: "مقدمة في الذكاء الاصطناعي",
-        pages: "7 - 21",
-        badge: "الأسس والمفاهيم",
+        id: 'ch1',
+        num: 1,
+        title: 'الفصل الأول: مفاهيم الذكاء الاصطناعي والأمن السيبراني',
+        shortTitle: 'الفصل الأول',
+        summary: 'الأسس المفاهيمية للأمن السيبراني، التهديدات والثغرات والمخاطر، المعلومات المضللة، ومبادئ الذكاء الاصطناعي وفوائده ومخاطره.',
         objectives: [
-          "تعريف الطالب بمفهوم الذكاء الاصطناعي وأهميته في تحسين الكفاءة وتبسيط العمليات في مجالات متعددة.",
-          "اكتساب نظرة على مراحل تطور الذكاء الاصطناعي وأهم المحطات التاريخية التي شكلت مساره.",
-          "التعرف على كيفية استخدام الذكاء الاصطناعي في مختلف المجالات وفي الأمن السيبراني.",
-          "التعرف على أهم المبادئ الأساسية للذكاء الاصطناعي: البحث، التعلم، الاستدلال، تمثيل المعرفة، التخطيط.",
-          "التعرف على أهمية البيانات في تدريب وتحسين نماذج الذكاء الاصطناعي وأنواعها حسب التنظيم."
+          'توضيح المفاهيم الأساسية للأمن السيبراني والتمييز بين التهديد (Threat) والثغرة (Vulnerability) والمخاطر (Risk).',
+          'التعرف على أشكال المعلومات المضللة والتزييف العميق وتأثيرها في الفضاء الرقمي.',
+          'فهم مفهوم الذكاء الاصطناعي ومراحل تطوره التاريخي ومبادئه الأساسية.',
+          'موازنة فوائد الذكاء الاصطناعي في الدفاع السيبراني مقابل مخاطره وإساءة استخدامه.',
         ],
-        sections: [
+        topics: [
           {
-            code: "1-1",
-            title: "المفهوم العام للذكاء الاصطناعي وأهمية استخدامه",
-            body: `الذكاء الاصطناعي (Artificial Intelligence - AI) هو أحد فروع علوم الحاسوب، ويهتم بإنشاء أنظمة قادرة على تنفيذ مهام ترتبط عادةً بالذكاء البشري مثل الاستدلال والتعلم وحل المشكلات والإدراك واتخاذ القرارات. يجمع بين التعلم الآلي ومعالجة اللغة الطبيعية والرؤية الحاسوبية والروبوتات وتمثيل المعرفة. يتجاوز قيود أنظمة الحماية التقليدية عبر التعرف المستمر على الأنماط، وتحليل التنبيهات والسجلات، وتحديد الأولويات، وتسريع الاستجابة في الوقت شبه الحقيقي مع ضرورة حماية أنظمة الذكاء الاصطناعي نفسها من الخداع والتلاعب.`
+            heading: '1-1 المفاهيم الأساسية في الأمن السيبراني والتهديدات',
+            points: [
+              'الأمن السيبراني: حماية الأنظمة والشبكات والبيانات من الهجمات الرقمية والوصول غير المصرح به أو التعديل أو التعطيل.',
+              'العلاقة بين التهديد والثغرة والمخاطر: التهديد هو مصدر الضرر المحتمل، والثغرة هي نقطة الضعف القابلة للاستغلال، والمخاطر هي احتمالية تحقق الضرر وأثره.',
+              'المعلومات المضللة: تشمل الأخبار الزائفة، التزييف العميق (Deepfakes)، والروبوتات الوهمية لتضخيم التضليل الرقمي.',
+            ],
           },
           {
-            code: "1-1-1",
-            title: "حالات استخدام الذكاء الاصطناعي في الأمن السيبراني",
-            body: `أبرز سبع حالات استخدام:
-1. اكتشاف التهديدات: تحليل البيانات واكتشاف الأنشطة غير الطبيعية والتهديدات السيبرانية.
-2. اكتشاف البرمجيات الخبيثة: التعرف على البرمجيات الخبيثة والحد من تأثيرها.
-3. كشف عمليات التسلل: مراقبة الشبكات واكتشاف محاولات الدخول غير المصرح بها في أنظمة كشف ومنع التسلل.
-4. اكتشاف هجمات حجب الخدمة (DoS / DDoS): التعرف على الأنشطة غير الطبيعية الناتجة عنها.
-5. تقييم نقاط الضعف: المساعدة في تحديد نقاط الضعف والمخاطر التي قد تستغلها الهجمات.
-6. الاستجابة للتهديدات: تحليل التنبيهات الأمنية وتحديد أولوياتها وتسريع الاستجابة للحوادث.
-7. التحقيق الجنائي الرقمي: تحليل البيانات المرتبطة بالحوادث الأمنية للمساعدة في التحقيق فيها.`
+            heading: '1-2 مفهوم الذكاء الاصطناعي ومبادئه وفوائده ومخاطره',
+            points: [
+              'الذكاء الاصطناعي (AI): قدرة الأنظمة الحاسوبية على التعلم والاستدلال واتخاذ القرارات وتحليل الأنماط المعقدة.',
+              'الفوائد الدفاعية: تسريع رصد الشذوذ، تحليل السجلات الضخمة، وأتمتة الاستجابة الأولية.',
+              'المخاطر: تطوير هجمات متكيفة، تصيد احتيالي عالي الإقناع، وهجمات تستهدف النماذج الذكية نفسها.',
+            ],
+          },
+        ],
+        table: {
+          headers: ['المفهوم', 'الوصف المختصر', 'الدور في المنظومة الأمنية'],
+          rows: [
+            ['التهديد (Threat)', 'عامل أو حدث محتمل لإلحاق الضرر بالأنظمة', 'تحديد مصادر الخطر وأساليب الهجوم المحتملة'],
+            ['الثغرة (Vulnerability)', 'نقطة ضعف برمجية أو إعدادية أو بشرية', 'تحديد أولويات الترقيع والتحصين الوقائي'],
+            ['المخاطر (Risk)', 'احتمالية استغلال الثغرة وحجم الأثر الفعلي', 'توجيه الموارد نحو حماية الأصول الأكثر حساسية'],
+          ],
+        },
+        relatedFigures: ['fig-1'],
+      },
+      {
+        id: 'ch2',
+        num: 2,
+        title: 'الفصل الثاني: تعلم الآلة وتصنيف التهديدات',
+        shortTitle: 'الفصل الثاني',
+        summary: 'أنواع التعلم الآلي (الخاضع للإشراف، غير الخاضع للإشراف، المعزز)، تقنيات التصنيف، وهندسة الميزات وتهيئة البيانات الأمنية.',
+        objectives: [
+          'المقارنة بين التعلم الخاضع للإشراف والتعلم غير الخاضع للإشراف والتعلم المعزز في المسائل الأمنية.',
+          'التعرف على أبرز تقنيات التصنيف مثل أشجار القرار والغابات العشوائية وSVM وKNN.',
+          'فهم خطوات تهيئة البيانات الأمنية الضخمة (5Vs) وتنظيفها وهندسة الميزات.',
+          'تجنب الإفراط في التخصيص (Overfitting) عبر التقسيم السليم للبيانات.',
+        ],
+        topics: [
+          {
+            heading: '2-1 أنواع التعلم الآلي في الأمن السيبراني',
+            points: [
+              'التعلم الخاضع للإشراف (Supervised): التدريب على بيانات موسومة لتصنيف الرسائل أو الروابط أو الملفات إلى سليمة أو خبيثة.',
+              'التعلم غير الخاضع للإشراف (Unsupervised): اكتشاف التجمعات والأنماط الشاذة في حركة الشبكة دون وسوم مسبقة.',
+              'التعلم المعزز (Reinforcement): تعلم السياسات الدفاعية المثلى عبر التفاعل مع البيئة والمكافآت والعقوبات.',
+            ],
           },
           {
-            code: "1-1-2",
-            title: "التهديدات والثغرات والمخاطر وثلاثية أمن المعلومات (CIA Triad)",
-            body: `الأمن السيبراني (Cybersecurity) يسعى لتحقيق ثلاثية أمن المعلومات (CIA Triad): السرية (Confidentiality) بعدم اطلاع غير المصرح لهم، والسلامة (Integrity) بضمان عدم التعديل دون تخويل، والتوافر (Availability) ببقاء المعلومات والخدمات متاحة عند الحاجة.
-• التهديد (Threat): ظرف أو حدث لديه القدرة على إلحاق الضرر بالأنظمة أو البيانات أو العمليات (مثل البرمجيات الخبيثة، الفدية، التصيد، DDoS، التهديدات الداخلية، الهجمات الخصمية وتسميم البيانات).
-• الثغرة الأمنية (Vulnerability): نقطة ضعف أو خلل في النظام يمكن استغلاله (في البرمجيات، الشبكات، التطبيقات، الإعدادات، أو بيانات التدريب).
-• المخاطر (Risk): احتمال حدوث ضرر أو خسارة نتيجة استغلال تهديد لثغرة أمنية؛ فالتهديد يستغل الثغرة واجتماعهما يولد المخاطرة.`
+            heading: '2-2 تقنيات التصنيف وتهيئة البيانات',
+            points: [
+              'خوارزميات التصنيف: أشجار القرار (Decision Trees)، الغابات العشوائية (Random Forests)، آلات المتجهات الداعمة (SVM)، وأقرب الجيران (KNN).',
+              'تهيئة البيانات: جمع السجلات، إزالة التكرار والقيم المفقودة، واستخراج الميزات المؤثرة ثم تقسيم البيانات إلى تدريب وتحقق واختبار.',
+            ],
+          },
+        ],
+        table: {
+          headers: ['نوع التعلم / التقنية', 'آلية العمل', 'تطبيق سيبراني مباشر'],
+          rows: [
+            ['التعلم الخاضع للإشراف', 'التعلم من أمثلة موسومة معروفة الفئة', 'فلترة رسائل التصيد الاحتيالي والبرمجيات الضارة'],
+            ['التعلم غير الخاضع للإشراف', 'استكشاف التجمعات والانحرافات تلقائياً', 'رصد السلوك الشاذ داخل الشبكة الداخلية'],
+            ['التعلم المعزز', 'تحسين القرارات بالتجربة والمكافأة', 'تحديث قواعد الحظر والعزل الديناميكي'],
+          ],
+        },
+        relatedFigures: ['fig-2'],
+      },
+      {
+        id: 'ch3',
+        num: 3,
+        title: 'الفصل الثالث: التعلم العميق وكشف الاختراقات',
+        shortTitle: 'الفصل الثالث',
+        summary: 'بنية العصبون الاصطناعي والشبكات العصبية متعددة الطبقات، التعلم العميق، وأنظمة كشف ومنع التسلل (IDS/IDPS).',
+        objectives: [
+          'فهم بنية العصبون الاصطناعي وتسلسل انتقال البيانات عبر طبقات الشبكة العصبية.',
+          'إدراك ميزة التعلم العميق في استخلاص التمثيلات المعقدة من البيانات الشبكية الضخمة.',
+          'التمييز بين أنظمة كشف التسلل (IDS) وأنظمة كشف ومنع التسلل (IDPS).',
+          'مقارنة الكشف القائم على التواقيع بالكشف القائم على السلوك والشذوذ لمواجهة هجمات يوم الصفر.',
+        ],
+        topics: [
+          {
+            heading: '3-1 الشبكات العصبية الاصطناعية والتعلم العميق',
+            points: [
+              'العصبون الاصطناعي: يستقبل المدخلات، يضربها بالأوزان، يضيف التحيز، ثم يطبق دالة التنشيط لإنتاج المخرج.',
+              'التعلم العميق (Deep Learning): شبكات متعددة الطبقات تستخلص سمات متدرجة التجريد دون الحاجة لهندسة ميزات يدوية معقدة لكل نمط.',
+            ],
           },
           {
-            code: "1-1-3",
-            title: "المعلومات المضللة ودور الذكاء الاصطناعي فيها",
-            body: `المعلومات المضللة هي معلومات كاذبة أو غير دقيقة تهدف إلى خداع الأشخاص عبر إخفاء الحقيقة أو تشويهها. وتشمل أشكالها: الإشاعة (Rumor)، الأخبار الكاذبة (Fake News)، الرسائل غير المرغوب فيها (Spam)، التضليل المتعمد (Disinformation)، والمعلومات الخاطئة (False Information). قد يستغل المهاجم الذكاء الاصطناعي لصياغة رسائل أكثر إقناعاً أو توليد صوت وصورة تنتحل هوية شخص.`
+            heading: '3-2 أنظمة كشف ومنع التسلل (IDS / IDPS)',
+            points: [
+              'نظام IDS يراقب حركة الشبكة ويطلق التنبيهات عند رصد نشاط مشبوه، بينما يضيف IDPS القدرة على الحظر والاعتراض الفوري.',
+              'الكشف السلوكي يبني خط أساس للسلوك الطبيعي ويرصد الانحرافات غير المألوفة حتى للهجمات الجديدة.',
+            ],
+          },
+        ],
+        table: {
+          headers: ['المعيار', 'الكشف القائم على التواقيع', 'الكشف الذكي القائم على السلوك'],
+          rows: [
+            ['آلية الرصد', 'مقارنة الحزم ببصمات هجمات معروفة مسبقاً', 'تحليل الانحراف عن السلوك الطبيعي المرجعي'],
+            ['الهجمات الجديدة (Zero-Day)', 'محدود القدرة ما لم يُحدّث التوقيع', 'قادر على اكتشاف الأنماط الشاذة غير المسبوقة'],
+            ['معدل التنبيهات الكاذبة', 'منخفض للهجمات المعروفة', 'يتطلب ضبطاً مستمراً لخط الأساس السلوكي'],
+          ],
+        },
+        relatedFigures: ['fig-4'],
+      },
+      {
+        id: 'ch4',
+        num: 4,
+        title: 'الفصل الرابع: تحليل البرمجيات الخبيثة والتصيد الذكي',
+        shortTitle: 'الفصل الرابع',
+        summary: 'استخدام نماذج الذكاء الاصطناعي في كشف البرمجيات الخبيثة متعددة الأشكال والتصدي لهجمات التصيد الاحتيالي المتطورة.',
+        objectives: [
+          'التمييز بين التحليل الثابت والتحليل الديناميكي/السلوكي للبرمجيات الخبيثة.',
+          'فهم كيف يرصد الذكاء الاصطناعي البرمجيات الخبيثة متعددة الأشكال (Polymorphic).',
+          'التعرف على مؤشرات كشف التصيد الاحتيالي الذكي في البريد والروابط والمحتوى.',
+          'إدراك أهمية الجمع بين تحليل المحتوى وتحليل سلوك المرسل والنطاقات.',
+        ],
+        topics: [
+          {
+            heading: '4-1 اكتشاف البرمجيات الخبيثة بالذكاء الاصطناعي',
+            points: [
+              'التحليل الثابت يفحص بنية الملف وترويساته دون تشغيله، بينما يراقب التحليل الديناميكي سلوكه أثناء التنفيذ في بيئة معزولة.',
+              'نماذج التصنيف الذكية تكتشف الأنماط السلوكية المشبوهة مثل محاولات التشفير القسري أو تعديل ملفات النظام.',
+            ],
           },
           {
-            code: "1-1-4 & 1-1-5",
-            title: "أنواع الهجمات السيبرانية ودور الذكاء الاصطناعي في اكتشاف الثغرات (OWASP)",
-            body: `من أنواع الهجمات السيبرانية: البرمجيات الخبيثة (الفيروسات، الديدان، أحصنة طروادة)، التصيد الاحتيالي (الاحتيال عبر البريد، الصيد الموجه Spear Phishing)، برامج الفدية (Ransomware)، هجمات حجب الخدمة الموزعة (DDoS وشبكات Botnets)، هجوم الوسيط (Man-in-the-Middle)، وحقن SQL (SQL Injection).
-يساعد الذكاء الاصطناعي المختص الأمني في اكتشاف الثغرات عبر 3 طرائق: الفحص الآلي، اكتشاف الأنماط غير الطبيعية، وترتيب الأولويات — ومنها ثغرات قائمة OWASP العشر (ضعف التحكم في الوصول، سوء الإعداد الأمني، إخفاقات سلسلة التوريد، الإخفاقات التشفيرية، الحقن، التصميم غير الآمن، إخفاقات المصادقة، إخفاقات سلامة البرمجيات/البيانات، إخفاقات التسجيل والتنبيه، وسوء التعامل مع الحالات الاستثنائية).`
+            heading: '4-2 كشف التصيد الاحتيالي الذكي',
+            points: [
+              'تحليل النصوص والروابط وسمعة النطاقات لاكتشاف رسائل التصيد الموجهة (Spear Phishing) حتى لو صيغت بلغة مقنعة.',
+              'رصد التشابه البصري للنطاقات المزيفة ومؤشرات الاستعجال والخداع الهندسي.',
+            ],
+          },
+        ],
+        table: {
+          headers: ['أسلوب التحليل', 'ما الذي يفحصه؟', 'نقطة القوة الأساسية'],
+          rows: [
+            ['التحليل الثابت الذكي', 'خصائص الملف، البنية، والاستدعاءات دون تشغيل', 'سرعة عالية في الفرز الأولي قبل التنفيذ'],
+            ['التحليل السلوكي الديناميكي', 'سلوك البرنامج في الذاكرة والشبكة والملفات', 'كشف البرمجيات المموهة ومتعددة الأشكال'],
+            ['تحليل التصيد بالذكاء الاصطناعي', 'النص، بنية الرابط، هوية المرسل، وسياق الطلب', 'إيقاف محاولات سرقة بيانات الدخول مبكراً'],
+          ],
+        },
+        relatedFigures: ['fig-1'],
+      },
+      {
+        id: 'ch5',
+        num: 5,
+        title: 'الفصل الخامس: أنظمة SIEM وSOAR والاستجابة الآلية',
+        shortTitle: 'الفصل الخامس',
+        summary: 'تكامل منصات إدارة المعلومات والأحداث الأمنية (SIEM) مع منصات التنسيق والأتمتة والاستجابة (SOAR) في مراكز العمليات الأمنية.',
+        objectives: [
+          'توضيح وظيفة نظام SIEM في جمع السجلات وتوحيدها وربط الأحداث الأمنية.',
+          'فهم دور نظام SOAR في أتمتة مسارات العمل (Playbooks) وتنسيق الأدوات الدفاعية.',
+          'بيان كيف يقلل تكامل SIEM وSOAR من زمن الاكتشاف والاستجابة للحوادث.',
+          'تقدير دور المحلل البشري في الإشراف على القرارات المؤتمتة.',
+        ],
+        topics: [
+          {
+            heading: '5-1 منصة SIEM وربط الأحداث الذكي',
+            points: [
+              'تجمع SIEM السجلات من الجدران النارية، الخوادم، ونقاط النهاية، وتوحّد صيغها لربط الأحداث المتفرقة.',
+              'يقلل الذكاء الاصطناعي من إرهاق التنبيهات (Alert Fatigue) عبر ترتيب الأولويات وتجميع المؤشرات المرتبطة.',
+            ],
           },
           {
-            code: "1-1-6 & 1-2",
-            title: "فوائد ومخاطر الذكاء الاصطناعي والتطور التاريخي",
-            body: `الفوائد: اكتشاف التهديدات بسرعة، الاستجابة الآلية، تحليل كميات كبيرة من البيانات، التعلم المستمر والتطور، وتقليل التكاليف والجهد البشري. المخاطر:
+            heading: '5-2 منصة SOAR والاستجابة الآلية (Playbooks)',
+            points: [
+              'تنسق SOAR بين أدوات الحماية وتنفذ خطوات الاستجابة القياسية آلياً مثل عزل الجهاز المصاب أو حظر عنوان IP ضار.',
+              'تضمن سرعة الاحتواء وتقليل الأخطاء البشرية في اللحظات الحرجة للهجوم.',
+            ],
+          },
+        ],
+        table: {
+          headers: ['المنظومة', 'الاختصار والدور', 'المخرجات الرئيسية'],
+          rows: [
+            ['SIEM', 'إدارة المعلومات والأحداث الأمنية', 'تجميع السجلات، ربط الأحداث، وتوليد تنبيهات ذات أولوية'],
+            ['SOAR', 'التنسيق والأتمتة والاستجابة الأمنية', 'تنفيذ خطط الاستجابة المؤتمتة واحتواء الحوادث بسرعة'],
+          ],
+        },
+        relatedFigures: ['fig-3'],
+      },
+      {
+        id: 'ch6',
+        num: 6,
+        title: 'الفصل السادس: أخلاقيات وتحديات الهجمات المضادة',
+        shortTitle: 'الفصل السادس',
+        summary: 'الهجمات المعادية وتسميم البيانات، قابلية التفسير، الخصوصية والتحيز، والتوجهات المستقبلية كالتعلم الفدرالي والحوسبة الكمومية.',
+        objectives: [
+          'التمييز بين الهجمات المعادية (Adversarial Attacks) وتسميم البيانات (Data Poisoning).',
+          'إدراك أهمية قابلية التفسير (Explainability) والخصوصية في الأنظمة الأمنية الذكية.',
+          'فهم مبدأ التعلم الفدرالي (Federated Learning) في حماية البيانات الحساسة الموزعة.',
+          'استشراف أثر الحوسبة الكمومية والتشفير المقاوم للكم في مستقبل الأمن السيبراني.',
+        ],
+        topics: [
+          {
+            heading: '6-1 تحديات أمان نماذج الذكاء الاصطناعي وأخلاقياتها',
+            points: [
+              'الهجمات المعادية: تعديل المدخلات بتمويه دقيق لخداع النموذج وجعله يخطئ في التصنيف.',
+              'تسميم البيانات: تلويث بيانات التدريب لإضعاف النموذج أو زرع ثغرة سلوكية فيه.',
+              'قابلية التفسير والخصوصية: ضرورة فهم أسباب قرارات النموذج وحماية البيانات الشخصية داخل السجلات.',
+            ],
+          },
+          {
+            heading: '6-2 التوجهات المستقبلية: التعلم الفدرالي والحوسبة الكمومية',
+            points: [
+              'التعلم الفدرالي: تدريب النماذج محلياً وتبادل التحديثات دون نقل البيانات الخام الحساسة.',
+              'الحوسبة الكمومية: تدفع نحو تطوير معايير التشفير ما بعد الكمّي لحماية الاتصالات المستقبلية.',
+            ],
+          },
+        ],
+        table: {
+          headers: ['التحدي / التوجه', 'الوصف المختصر', 'الإجراء الدفاعي أو المستقبلي'],
+          rows: [
+            ['الهجمات المعادية', 'خداع النموذج بمدخلات مموهة أثناء التشغيل', 'التدريب المعادي والتحقق متعدد الطبقات'],
+            ['تسميم البيانات', 'إفساد بيانات التدريب لتشويه تعلم النموذج', 'تدقيق مصادر البيانات وحماية سلامتها'],
+            ['التعلم الفدرالي', 'تدريب تعاوني لامركزي دون مشاركة البيانات الخام', 'تعزيز الخصوصية بين المؤسسات الأمنية'],
+            ['الحوسبة الكمومية', 'قدرات حسابية تهدد بعض خوارزميات التشفير الحالية', 'الانتقال إلى التشفير المقاوم للكم'],
+          ],
+        },
+        relatedFigures: ['fig-4'],
+      },
+    ];
+
+    /**
+     * بنك الأسئلة للاختبارات التفاعلية (4 مستويات: يومي، شهري، نصف السنة، آخر السنة)
+     */
+    const TEST_BANK = [
+      // اختبار يومي (daily)
+      {
+        id: 'd1',
+        category: 'daily',
+        chapter: 'الفصل الأول',
+        question: 'ما المقصود بالثغرة الأمنية (Vulnerability) في سياق الأمن السيبراني؟',
+        options: [
+          'نقطة ضعف برمجية أو إعدادية أو بشرية يمكن لتهديد أن يستغلها',
+          'البرنامج الدفاعي الذي يحظر عناوين IP الضارة تلقائياً',
+          'عملية ضغط ملفات السجلات لتوفير المساحة التخزينية',
+          'بروتوكول نقل الملفات المشفرة بين الخوادم',
+        ],
+        correct: 0,
+        explanation: 'الثغرة هي نقطة ضعف أو قصور قابل للاستغلال بواسطة تهديد، وعند التقاء التهديد بالثغرة تنشأ المخاطر الأمنية.',
+      },
+      {
+        id: 'd2',
+        category: 'daily',
+        chapter: 'الفصل الثاني',
+        question: 'أي نوع من التعلم الآلي يعتمد على تدريب النموذج باستخدام بيانات موسومة مسبقاً؟',
+        options: [
+          'التعلم الخاضع للإشراف (Supervised Learning)',
+          'التعلم غير الخاضع للإشراف (Unsupervised Learning)',
+          'التجميع العشوائي بدون خصائص',
+          'التشفير المتماثل للملفات',
+        ],
+        correct: 0,
+        explanation: 'في التعلم الخاضع للإشراف تتوفر لكل مثال مدخلات مقترنة بوسم أو فئة معروفة (مثل سليم أو تصيد احتيالي).',
+      },
+      {
+        id: 'd3',
+        category: 'daily',
+        chapter: 'الفصل الثالث',
+        question: 'ما الفارق الجوهري بين نظام IDS ونظام IDPS؟',
+        options: [
+          'IDS يكتشف التسلل وينبّه عليه، بينما IDPS يضيف القدرة على المنع والاعتراض الفوري',
+          'IDS يعمل فقط على الشبكات اللاسلكية وIDPS يعمل فقط على الطابعات',
+          'IDS يقوم بتشفير الأقراص الصلبة بينما IDPS يحذفها',
+          'لا يوجد أي فرق وظيفي بين النظامين',
+        ],
+        correct: 0,
+        explanation: 'نظام كشف التسلل (IDS) يراقب وينبّه، أما نظام كشف ومنع التسلل (IDPS) فيتخذ إجراء المنع والحظر مباشرة.',
+      },
+      {
+        id: 'd4',
+        category: 'daily',
+        chapter: 'الفصل الخامس',
+        question: 'ما الوظيفة الأساسية لمنصة SOAR في مركز العمليات الأمنية؟',
+        options: [
+          'تنسيق الأدوات الأمنية وأتمتة إجراءات الاستجابة للحوادث عبر خطط عمل (Playbooks)',
+          'تصنيع بطاقات الشبكة في الحواسيب المحمولة',
+          'استبدال كلمات المرور بأسماء المستخدمين',
+          'إيقاف جميع الخوادم عند انقطاع الإنترنت',
+        ],
+        correct: 0,
+        explanation: 'تعمل منصات SOAR على التنسيق والأتمتة وتسريع الاستجابة للحوادث الأمنية لتقليص زمن الاحتواء.',
+      },
+
+      // اختبار شهري (monthly)
+      {
+        id: 'm1',
+        category: 'monthly',
+        chapter: 'الفصل الأول',
+        question: 'كيف يساهم الذكاء الاصطناعي في تعزيز قدرات مراكز العمليات الأمنية (SOC)؟',
+        options: [
+          'تسريع تحليل كميات السجلات الضخمة واكتشاف الأنماط الشاذة ودعم الاستجابة المبكرة',
+          'إلغاء الحاجة إلى تحديث الأنظمة وسد الثغرات البرمجية تماماً',
+          'منع المستخدمين من الوصول إلى الإنترنت نهائياً',
+          'العمل دون الحاجة لأي بيانات أو سجلات سابقة',
+        ],
+        correct: 0,
+        explanation: 'يعزز الذكاء الاصطناعي سرعة ودقة تحليل الأحداث الضخمة ورصد الشذوذ، لكنه يظل جزءاً من منظومة أمنية متكاملة.',
+      },
+      {
+        id: 'm2',
+        category: 'monthly',
+        chapter: 'الفصل الثاني',
+        question: 'لماذا تُعد خطوة تقسيم البيانات إلى تدريب وتحقق واختبار ضرورية قبل اعتماد النموذج؟',
+        options: [
+          'لقياس قدرة النموذج على التعميم على بيانات جديدة وتجنب الإفراط في التخصيص (Overfitting)',
+          'لمضاعفة حجم قاعدة البيانات عشوائياً',
+          'لتعطيل خوارزمية التصنيف أثناء التشغيل',
+          'للاستغناء عن مرحلة تنظيف البيانات الخام',
+        ],
+        correct: 0,
+        explanation: 'يضمن التقسيم السليم تقييم الأداء الحقيقي للنموذج على بيانات لم يرها أثناء التدريب والتأكد من عدم حفظه للضوضاء.',
+      },
+      {
+        id: 'm3',
+        category: 'monthly',
+        chapter: 'الفصل الرابع',
+        question: 'لماذا يتفوق التحليل السلوكي الذكي في كشف البرمجيات الخبيثة متعددة الأشكال (Polymorphic)؟',
+        options: [
+          'لأنه يراقب السلوك الفعلي للبرنامج أثناء التنفيذ حتى لو تغيّر توقيعه الثابت باستمرار',
+          'لأنه يعتمد فقط على اسم الملف الظاهر للمستخدم',
+          'لأنه يوقف تشغيل جميع البرامج الجديدة دون فحص',
+          'لأنه يفحص حجم الشاشة ودقة الألوان فقط',
+        ],
+        correct: 0,
+        explanation: 'البرمجيات متعددة الأشكال تغير توقيعها لتجاوز الفحص التقليدي، لكن سلوكها الخبيث يكشفها أمام نماذج التحليل السلوكي.',
+      },
+      {
+        id: 'm4',
+        category: 'monthly',
+        chapter: 'الفصل السادس',
+        question: 'ما المقصود بالهجمات المعادية (Adversarial Attacks) على نماذج الذكاء الاصطناعي؟',
+        options: [
+          'إدخال تعديلات مموهة ومدروسة على المدخلات لخداع النموذج وتضليل قراره أو تصنيفه',
+          'فصل كابل الشبكة عن الخادم الرئيسي',
+          'تغيير خلفية سطح المكتب في نظام التشغيل',
+          'تحديث قاعدة بيانات التواقيع في مكافح الفيروسات',
+        ],
+        correct: 0,
+        explanation: 'تستهدف الهجمات المعادية استغلال حساسية النموذج لمدخلات مصممة خصيصاً لدفعه إلى تصنيف خاطئ.',
+      },
+
+      // امتحان نصف السنة (midterm)
+      {
+        id: 'mid1',
+        category: 'midterm',
+        chapter: 'الفصل الأول',
+        question: 'أي من الآتي يُعد من أبرز أشكال المعلومات المضللة التي تستهدف الفضاء الرقمي؟',
+        options: [
+          'التزييف العميق (Deepfakes) والأخبار المفبركة والحسابات الوهمية المنسقة',
+          'تفعيل التحديثات الأمنية التلقائية لنظام التشغيل',
+          'استخدام شهادات التشفير الرقمية الموثوقة HTTPS',
+          'تطبيق مبدأ أقل الصلاحيات للمستخدمين',
+        ],
+        correct: 0,
+        explanation: 'تشمل المعلومات المضللة التزييف العميق والأخبار الكاذبة والحسابات الآلية الوهمية التي تضلل المستخدمين.',
+      },
+      {
+        id: 'mid2',
+        category: 'midterm',
+        chapter: 'الفصل الثاني',
+        question: 'أي خوارزمية من الآتي تعتمد على بناء مجموعة من الأشجار والتصويت بينها لرفع دقة التصنيف؟',
+        options: [
+          'الغابات العشوائية (Random Forests)',
+          'بروتوكول نقل البريد SMTP',
+          'نظام أسماء النطاقات DNS',
+          'ذاكرة الوصول العشوائي RAM',
+        ],
+        correct: 0,
+        explanation: 'تجمع الغابات العشوائية تنبؤات عدة أشجار قرار لتقليل التباين ورفع دقة واستقرار التصنيف.',
+      },
+      {
+        id: 'mid3',
+        category: 'midterm',
+        chapter: 'الفصل الثالث',
+        question: 'ما دور دالة التنشيط (Activation Function) في العصبون الاصطناعي؟',
+        options: [
+          'إدخال غير الخطية وتحديد مخرج العصبون بناءً على المجموع الموزون للمدخلات والتحيز',
+          'تخزين السجلات الأمنية على القرص الصلب',
+          'إرسال رسائل البريد الإلكتروني للمستخدمين',
+          'تحديد سرعة مروحة التبريد في المعالج',
+        ],
+        correct: 0,
+        explanation: 'تمكّن دالة التنشيط الشبكة العصبية من تعلم العلاقات غير الخطية المعقدة بين المدخلات والمخرجات.',
+      },
+      {
+        id: 'mid4',
+        category: 'midterm',
+        chapter: 'الفصل الثالث',
+        question: 'لماذا يُعد الكشف القائم على السلوك والشذوذ مهماً في مواجهة هجمات يوم الصفر (Zero-Day)؟',
+        options: [
+          'لأنه يرصد الانحراف عن السلوك الطبيعي المرجعي دون الحاجة لتوقيع مسبق للهجوم',
+          'لأنه يحظر جميع الاتصالات الخارجية طوال اليوم',
+          'لأنه يعتمد على قائمة كلمات مرور قديمة',
+          'لأنه لا يتطلب أي مراقبة لحركة الشبكة',
+        ],
+        correct: 0,
+        explanation: 'هجمات يوم الصفر لا تملك تواقيع معروفة بعد، لذا يساعد التحليل السلوكي الذكي في رصد آثارها الشاذة مبكراً.',
+      },
+
+      // امتحان آخر السنة (final)
+      {
+        id: 'fin1',
+        category: 'final',
+        chapter: 'الفصل الأول',
+        question: 'عند تقييم المخاطر السيبرانية، متى ترتفع المخاطر الفعلية على أصل معلوماتي؟',
+        options: [
+          'عندما يتوفر تهديد نشط مع وجود ثغرة قابلة للاستغلال في ذلك الأصل',
+          'عندما تكون جميع الأنظمة محدثة ومعزولة ومشفرة بالكامل',
+          'عند إيقاف تشغيل الخادم وفصله عن الطاقة والشبكة',
+          'عند استخدام المصادقة متعددة العوامل لجميع الحسابات',
+        ],
+        correct: 0,
+        explanation: 'المخاطر تنشأ من تلاقي التهديد مع الثغرة القابلة للاستغلال، وتُقاس باحتمالية التحقق وحجم الأثر.',
+      },
+      {
+        id: 'fin2',
+        category: 'final',
+        chapter: 'الفصل الرابع',
+        question: 'كيف تتكامل تقنيات كشف التصيد الاحتيالي الذكي لحماية المستخدمين؟',
+        options: [
+          'تجمع بين تحليل لغة الرسالة وبنية الروابط وسمعة النطاقات وسياق الطلب لاكتشاف الخداع',
+          'تكتفي بحظر جميع الرسائل التي تحتوي على صور فقط',
+          'تسمح بفتح جميع المرفقات التنفيذية تلقائياً',
+          'تعتمد على طول اسم المرسل بالأحرف فقط',
+        ],
+        correct: 0,
+        explanation: 'الجمع بين المؤشرات النصية والتقنية والسلوكية يرفع قدرة الأنظمة الذكية على إحباط محاولات التصيد المتقنة.',
+      },
+      {
+        id: 'fin3',
+        category: 'final',
+        chapter: 'الفصل الخامس',
+        question: 'كيف يتكامل نظام SIEM مع نظام SOAR في الاستجابة للحوادث الأمنية؟',
+        options: [
+          'يجمع SIEM السجلات ويربط الأحداث لاكتشاف الحادث، بينما ينسق SOAR ويؤتمت خطوات الاحتواء والاستجابة',
+          'يقوم SOAR بتصنيع الخوادم بينما يقوم SIEM بتمديد الكابلات',
+          'يعمل SIEM فقط في غياب الإنترنت ويعمل SOAR في غياب الحواسيب',
+          'لا توجد أي علاقة تكاملية بين المنظومتين',
+        ],
+        correct: 0,
+        explanation: 'يكمّل SIEM عمل SOAR؛ فالأول يركز على الرؤية والتحليل وربط الأحداث، والثاني على التنسيق والأتمتة والاستجابة السريعة.',
+      },
+      {
+        id: 'fin4',
+        category: 'final',
+        chapter: 'الفصل السادس',
+        question: 'ما الميزة الأساسية للتعلم الفدرالي (Federated Learning) في التطبيقات الأمنية؟',
+        options: [
+          'تدريب النماذج محلياً ومشاركة تحديثات النموذج فقط دون نقل البيانات الخام الحساسة إلى خادم مركزي',
+          'نشر السجلات السرية للمؤسسات على مواقع التواصل الاجتماعي',
+          'الاستغناء عن التشفير وحماية الخصوصية تماماً',
+          'تشغيل النموذج على جهاز واحد معزول دون أي تحديثات',
+        ],
+        correct: 0,
+        explanation: 'يحافظ التعلم الفدرالي على خصوصية البيانات الموزعة عبر إبقاء البيانات الخام في مواقعها وتبادل التحديثات النموذجية فقط.',
+      },
+    ];
+
+    /**
+     * الرسومات التوضيحية التفاعلية بصيغة SVG عالية الدقة
+     */
+    const FIGURES = [
+      {
+        id: 'fig-1',
+        chapter: 'الفصل الأول والرابع',
+        title: 'معمارية الكشف الذكي عن التهديدات السيبرانية وتحليل السلوك',
+        caption: 'يوضّح المخطط تدفق البيانات من مصادر الشبكة ونقاط النهاية إلى محرك استخراج السمات ونموذج الذكاء الاصطناعي لاتخاذ قرار الكشف أو الحظر أو التنبيه.',
+        svg: `
+          <svg viewBox="0 0 760 270" class="w-full h-auto rounded-2xl bg-[#060A12] border border-slate-800">
+            <defs>
+              <marker id="arrowSky" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#38BDF8" />
+              </marker>
+              <marker id="arrowEmerald" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#10B981" />
+              </marker>
+            </defs>
+
+            <!-- مصادر البيانات -->
+            <rect x="24" y="42" width="172" height="182" rx="14" fill="#0D1424" stroke="#38BDF8" stroke-width="2"/>
+            <text x="110" y="72" text-anchor="middle" fill="#7DD3FC" font-size="14" font-weight="bold">مصادر البيانات</text>
+            <line x1="42" y1="84" x2="178" y2="84" stroke="#1E293B" stroke-width="1.5"/>
+            <text x="110" y="108" text-anchor="middle" fill="#E2E8F0" font-size="11.5">حركة الشبكة وحزمها</text>
+            <text x="110" y="132" text-anchor="middle" fill="#E2E8F0" font-size="11.5">سجلات الخوادم والجدران</text>
+            <text x="110" y="156" text-anchor="middle" fill="#E2E8F0" font-size="11.5">الرسائل والروابط والملفات</text>
+            <text x="110" y="182" text-anchor="middle" fill="#94A3B8" font-size="10.5">بيانات خام متنوعة (5Vs)</text>
+
+            <!-- التهيئة وهندسة الميزات -->
+            <rect x="234" y="42" width="184" height="182" rx="14" fill="#0D1424" stroke="#A78BFA" stroke-width="2"/>
+            <text x="326" y="72" text-anchor="middle" fill="#DDD6FE" font-size="14" font-weight="bold">التهيئة وهندسة الميزات</text>
+            <line x1="252" y1="84" x2="400" y2="84" stroke="#1E293B" stroke-width="1.5"/>
+            <text x="326" y="108" text-anchor="middle" fill="#E2E8F0" font-size="11.5">تنظيف الضوضاء والقيم المفقودة</text>
+            <text x="326" y="132" text-anchor="middle" fill="#E2E8F0" font-size="11.5">توحيد الصيغ والترميز</text>
+            <text x="326" y="156" text-anchor="middle" fill="#E2E8F0" font-size="11.5">استخلاص السمات السلوكية</text>
+            <text x="326" y="182" text-anchor="middle" fill="#C4B5FD" font-size="10.5">تقسيم: تدريب / تحقق / اختبار</text>
+
+            <!-- محرك الذكاء الاصطناعي والقرار -->
+            <rect x="456" y="34" width="280" height="198" rx="16" fill="#091C1A" stroke="#10B981" stroke-width="2.2"/>
+            <text x="596" y="66" text-anchor="middle" fill="#6EE7B7" font-size="15" font-weight="bold">محرك الذكاء الاصطناعي للكشف</text>
+            <line x1="476" y1="78" x2="716" y2="78" stroke="#134E4A" stroke-width="1.5"/>
+            <rect x="476" y="92" width="240" height="34" rx="8" fill="#0D2926" stroke="#10B981" stroke-opacity="0.45"/>
+            <text x="596" y="114" text-anchor="middle" fill="#E2E8F0" font-size="11.5">تصنيف التهديدات والتصيد والبرمجيات الضارة</text>
+            <rect x="476" y="134" width="240" height="34" rx="8" fill="#0D2926" stroke="#38BDF8" stroke-opacity="0.45"/>
+            <text x="596" y="156" text-anchor="middle" fill="#E2E8F0" font-size="11.5">كشف الشذوذ والسلوك وهجمات يوم الصفر</text>
+            <text x="596" y="192" text-anchor="middle" fill="#6EE7B7" font-size="12" font-weight="bold">القرار: سليم • تنبيه SOC • حظر أو عزل فوري</text>
+
+            <line x1="196" y1="133" x2="232" y2="133" stroke="#38BDF8" stroke-width="2.2" marker-end="url(#arrowSky)"/>
+            <line x1="418" y1="133" x2="454" y2="133" stroke="#10B981" stroke-width="2.2" marker-end="url(#arrowEmerald)"/>
+          </svg>
+        `,
+      },
+      {
+        id: 'fig-2',
+        chapter: 'الفصل الثاني',
+        title: 'خط أنابيب تعلم الآلة في الأمن السيبراني (ML Security Pipeline)',
+        caption: 'مسار بناء نموذج تعلم الآلة للأمن السيبراني بدءاً من جمع البيانات وتنظيفها، مروراً بالتدريب والتحقق، وصولاً إلى النشر والمراقبة المستمرة.',
+        svg: `
+          <svg viewBox="0 0 760 245" class="w-full h-auto rounded-2xl bg-[#060A12] border border-slate-800">
+            <defs>
+              <marker id="arrowStep" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+                <path d="M0,0 L7,3.5 L0,7 Z" fill="#38BDF8" />
+              </marker>
+            </defs>
+
+            <rect x="20" y="54" width="128" height="126" rx="13" fill="#0D1424" stroke="#38BDF8" stroke-width="1.8"/>
+            <text x="84" y="84" text-anchor="middle" fill="#7DD3FC" font-size="12.5" font-weight="bold">1. جمع البيانات</text>
+            <text x="84" y="112" text-anchor="middle" fill="#CBD5E1" font-size="10.5">سجلات وحزم شبكية</text>
+            <text x="84" y="132" text-anchor="middle" fill="#94A3B8" font-size="10">وتهديدات موسومة</text>
+
+            <rect x="170" y="54" width="128" height="126" rx="13" fill="#0D1424" stroke="#A78BFA" stroke-width="1.8"/>
+            <text x="234" y="84" text-anchor="middle" fill="#DDD6FE" font-size="12.5" font-weight="bold">2. التنظيف والميزات</text>
+            <text x="234" y="112" text-anchor="middle" fill="#CBD5E1" font-size="10.5">توحيد وتصفية القيم</text>
+            <text x="234" y="132" text-anchor="middle" fill="#C4B5FD" font-size="10">استخلاص السمات</text>
+
+            <rect x="320" y="54" width="128" height="126" rx="13" fill="#0D1424" stroke="#10B981" stroke-width="1.8"/>
+            <text x="384" y="84" text-anchor="middle" fill="#6EE7B7" font-size="12.5" font-weight="bold">3. التدريب والضبط</text>
+            <text x="384" y="112" text-anchor="middle" fill="#CBD5E1" font-size="10.5">DT / RF / SVM / KNN</text>
+            <text x="384" y="132" text-anchor="middle" fill="#6EE7B7" font-size="10">تجنب Overfitting</text>
+
+            <rect x="470" y="54" width="128" height="126" rx="13" fill="#0D1424" stroke="#FBBF24" stroke-width="1.8"/>
+            <text x="534" y="84" text-anchor="middle" fill="#FDE68A" font-size="12.5" font-weight="bold">4. التقييم والاختبار</text>
+            <text x="534" y="112" text-anchor="middle" fill="#CBD5E1" font-size="10.5">قياس الدقة والتعميم</text>
+            <text x="534" y="132" text-anchor="middle" fill="#FDE68A" font-size="10">على بيانات جديدة</text>
+
+            <rect x="620" y="54" width="120" height="126" rx="13" fill="#0D1424" stroke="#F43F5E" stroke-width="1.8"/>
+            <text x="680" y="84" text-anchor="middle" fill="#FDA4AF" font-size="12.5" font-weight="bold">5. النشر الحي</text>
+            <text x="680" y="112" text-anchor="middle" fill="#CBD5E1" font-size="10.5">رصد مستمر وتحديث</text>
+            <text x="680" y="132" text-anchor="middle" fill="#FDA4AF" font-size="10">لمواجهة التغير</text>
+
+            <line x1="148" y1="117" x2="168" y2="117" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowStep)"/>
+            <line x1="298" y1="117" x2="318" y2="117" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowStep)"/>
+            <line x1="448" y1="117" x2="468" y2="117" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowStep)"/>
+            <line x1="598" y1="117" x2="618" y2="117" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowStep)"/>
+          </svg>
+        `,
+      },
+      {
+        id: 'fig-3',
+        chapter: 'الفصل الخامس',
+        title: 'آلية عمل وتكامل منظومتي SIEM و SOAR في مركز العمليات الأمنية',
+        caption: 'توضح كيف تقوم منصة SIEM بتجميع وربط الأحداث الأمنية لاكتشاف الحوادث وتقليل إرهاق التنبيهات، ثم تتولى منصة SOAR تنسيق الأدوات وأتمتة الاستجابة عبر Playbooks.',
+        svg: `
+          <svg viewBox="0 0 760 265" class="w-full h-auto rounded-2xl bg-[#060A12] border border-slate-800">
+            <defs>
+              <marker id="arrowSIEM" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#38BDF8" />
+              </marker>
+              <marker id="arrowSOAR" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#10B981" />
+              </marker>
+            </defs>
+
+            <rect x="24" y="45" width="170" height="175" rx="14" fill="#0D1424" stroke="#38BDF8" stroke-width="2"/>
+            <text x="109" y="75" text-anchor="middle" fill="#7DD3FC" font-size="14" font-weight="bold">بيئة المؤسسة</text>
+            <line x1="40" y1="88" x2="178" y2="88" stroke="#1E293B" stroke-width="1.5"/>
+            <text x="109" y="114" text-anchor="middle" fill="#E2E8F0" font-size="11.5">الجدران النارية والشبكات</text>
+            <text x="109" y="138" text-anchor="middle" fill="#E2E8F0" font-size="11.5">الخوادم ونقاط النهاية</text>
+            <text x="109" y="162" text-anchor="middle" fill="#E2E8F0" font-size="11.5">أنظمة المصادقة والهوية</text>
+            <text x="109" y="190" text-anchor="middle" fill="#94A3B8" font-size="10.5">إرسال السجلات والأحداث</text>
+
+            <rect x="236" y="45" width="222" height="175" rx="14" fill="#13172E" stroke="#A78BFA" stroke-width="2"/>
+            <text x="347" y="75" text-anchor="middle" fill="#DDD6FE" font-size="15" font-weight="bold">منصة SIEM</text>
+            <line x1="254" y1="88" x2="440" y2="88" stroke="#282E54" stroke-width="1.5"/>
+            <text x="347" y="114" text-anchor="middle" fill="#E2E8F0" font-size="11.5">• جمع السجلات وتوحيد صيغها</text>
+            <text x="347" y="138" text-anchor="middle" fill="#E2E8F0" font-size="11.5">• ربط الأحداث واكتشاف الحوادث</text>
+            <text x="347" y="162" text-anchor="middle" fill="#E2E8F0" font-size="11.5">• ترتيب الأولويات وتقليل الضوضاء</text>
+            <text x="347" y="190" text-anchor="middle" fill="#C4B5FD" font-size="10.5">إرسال تنبيهات عالية الدقة</text>
+
+            <rect x="500" y="45" width="236" height="175" rx="14" fill="#091C1A" stroke="#10B981" stroke-width="2"/>
+            <text x="618" y="75" text-anchor="middle" fill="#6EE7B7" font-size="15" font-weight="bold">منصة SOAR</text>
+            <line x1="518" y1="88" x2="718" y2="88" stroke="#134E4A" stroke-width="1.5"/>
+            <text x="618" y="114" text-anchor="middle" fill="#E2E8F0" font-size="11.5">• تنسيق الأدوات الأمنية المختلفة</text>
+            <text x="618" y="138" text-anchor="middle" fill="#E2E8F0" font-size="11.5">• تشغيل مسارات العمل (Playbooks)</text>
+            <text x="618" y="162" text-anchor="middle" fill="#E2E8F0" font-size="11.5">• عزل الجهاز أو حظر المصدر آلياً</text>
+            <text x="618" y="190" text-anchor="middle" fill="#6EE7B7" font-size="10.5">تقليص زمن الاستجابة + إشراف بشري</text>
+
+            <line x1="194" y1="132" x2="234" y2="132" stroke="#38BDF8" stroke-width="2.2" marker-end="url(#arrowSIEM)"/>
+            <line x1="458" y1="132" x2="498" y2="132" stroke="#10B981" stroke-width="2.2" marker-end="url(#arrowSOAR)"/>
+          </svg>
+        `,
+      },
+      {
+        id: 'fig-4',
+        chapter: 'الفصل الثالث والسادس',
+        title: 'الشبكات العصبية العميقة وعصبون المعالجة لكشف الشذوذ',
+        caption: 'توضّح كيف تمر المدخلات عبر الأوزان ودالة التنشيط داخل العصبون وعبر الطبقات المخفية المتعددة لاستخلاص الأنماط السلوكية المعقدة وتمييز الهجمات.',
+        svg: `
+          <svg viewBox="0 0 760 275" class="w-full h-auto rounded-2xl bg-[#060A12] border border-slate-800">
+            <defs>
+              <marker id="arrowNN" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+                <path d="M0,0 L7,3.5 L0,7 Z" fill="#38BDF8" />
+              </marker>
+              <marker id="arrowNNEm" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+                <path d="M0,0 L7,3.5 L0,7 Z" fill="#10B981" />
+              </marker>
+            </defs>
+
+            <!-- طبقة الإدخال -->
+            <rect x="24" y="42" width="152" height="190" rx="14" fill="#0D1424" stroke="#38BDF8" stroke-width="2"/>
+            <text x="100" y="72" text-anchor="middle" fill="#7DD3FC" font-size="13.5" font-weight="bold">طبقة الإدخال (X)</text>
+            <text x="100" y="106" text-anchor="middle" fill="#E2E8F0" font-size="11">x1: معدل الطلبات</text>
+            <text x="100" y="134" text-anchor="middle" fill="#E2E8F0" font-size="11">x2: حجم الحزم</text>
+            <text x="100" y="162" text-anchor="middle" fill="#E2E8F0" font-size="11">x3: أنماط المنافذ</text>
+            <text x="100" y="196" text-anchor="middle" fill="#94A3B8" font-size="10">مضروبة بالأوزان (W)</text>
+
+            <!-- عصبون المعالجة والتنشيط -->
+            <rect x="212" y="42" width="166" height="190" rx="14" fill="#13172E" stroke="#A78BFA" stroke-width="2"/>
+            <text x="295" y="72" text-anchor="middle" fill="#DDD6FE" font-size="13.5" font-weight="bold">العصبون والتنشيط</text>
+            <circle cx="295" cy="126" r="24" fill="#1E1B4B" stroke="#A78BFA" stroke-width="2"/>
+            <text x="295" y="131" text-anchor="middle" fill="#FFFFFF" font-size="13" font-weight="bold">Σ + b</text>
+            <text x="295" y="172" text-anchor="middle" fill="#C4B5FD" font-size="11">دالة التنشيط (f)</text>
+            <text x="295" y="196" text-anchor="middle" fill="#94A3B8" font-size="10">تمثيل غير خطي</text>
+
+            <!-- الطبقات العميقة -->
+            <rect x="414" y="42" width="166" height="190" rx="14" fill="#091C1A" stroke="#10B981" stroke-width="2"/>
+            <text x="497" y="72" text-anchor="middle" fill="#6EE7B7" font-size="13.5" font-weight="bold">الطبقات العميقة</text>
+            <text x="497" y="110" text-anchor="middle" fill="#E2E8F0" font-size="11">طبقات مخفية متعددة</text>
+            <text x="497" y="136" text-anchor="middle" fill="#A7F3D0" font-size="11">استخلاص سمات مجردة</text>
+            <text x="497" y="162" text-anchor="middle" fill="#E2E8F0" font-size="11">رصد الانحراف السلوكي</text>
+            <text x="497" y="196" text-anchor="middle" fill="#6EE7B7" font-size="10">مقاومة التمويه والهجمات</text>
+
+            <!-- طبقة القرار -->
+            <rect x="616" y="42" width="120" height="190" rx="14" fill="#0D1424" stroke="#FBBF24" stroke-width="2"/>
+            <text x="676" y="72" text-anchor="middle" fill="#FDE68A" font-size="13.5" font-weight="bold">طبقة القرار</text>
+            <rect x="630" y="102" width="92" height="32" rx="8" fill="#064E3B" stroke="#10B981"/>
+            <text x="676" y="122" text-anchor="middle" fill="#A7F3D0" font-size="11.5" font-weight="bold">سلوك طبيعي</text>
+            <rect x="630" y="148" width="92" height="32" rx="8" fill="#4C0519" stroke="#FB7185"/>
+            <text x="676" y="168" text-anchor="middle" fill="#FECDD3" font-size="11.5" font-weight="bold">تسلل / شاذ</text>
+
+            <line x1="176" y1="132" x2="210" y2="132" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowNN)"/>
+            <line x1="378" y1="132" x2="412" y2="132" stroke="#10B981" stroke-width="2" marker-end="url(#arrowNNEm)"/>
+            <line x1="580" y1="132" x2="614" y2="132" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowNN)"/>
+          </svg>
+        `,
+      },
+    ];
+
+    /**
+     * بنك الأسئلة المحلولة المصنفة حسب الفصول مع إمكانية إظهار/إخفاء الحل والتعليل
+     */
+    const SOLVED_QUESTIONS = [
+      {
+        id: 'qa-1',
+        chapter: 'الفصل الأول',
+        question: 'وضّح العلاقة بين التهديد (Threat) والثغرة (Vulnerability) والمخاطر (Risk) في الأمن السيبراني.',
+        answer: 'التهديد هو أي مصدر أو حدث محتمل يمكن أن يلحق ضرراً بالأنظمة أو البيانات، والثغرة هي نقطة ضعف برمجية أو إعدادية أو بشرية يمكن استغلالها، بينما تمثل المخاطر احتمالية استغلال التهديد للثغرة وحجم الأثر الفعلي الناتج عن ذلك.',
+        rationale: 'إزالة الثغرات أو تقليل احتمالية التهديد يؤدي مباشرة إلى خفض مستوى المخاطر على الأصول المعلوماتية.',
+      },
+      {
+        id: 'qa-2',
+        chapter: 'الفصل الأول',
+        question: 'ما أبرز فوائد ومخاطر استخدام الذكاء الاصطناعي في المجال السيبراني؟',
+        answer: 'من فوائده: سرعة تحليل السجلات الضخمة، اكتشاف الأنماط الشاذة، وأتمتة الاستجابة الأولية. ومن مخاطره: أتمتة الهجمات وتطوير التصيد الاحتيالي، وتعرض النماذج للهجمات المعادية أو تسميم البيانات.',
+        rationale: 'يمثل الذكاء الاصطناعي أداة مزدوجة الاستخدام، مما يتطلب تحصين النماذج الدفاعية ومراقبتها بشرياً.',
+      },
+      {
+        id: 'qa-3',
+        chapter: 'الفصل الثاني',
+        question: 'قارن بين التعلم الخاضع للإشراف والتعلم غير الخاضع للإشراف والتعلم المعزز.',
+        answer: 'يعتمد التعلم الخاضع للإشراف على بيانات موسومة مسبقاً للتصنيف والتنبؤ، بينما يكتشف التعلم غير الخاضع للإشراف الأنماط والتجمعات الشاذة في بيانات غير موسومة، أما التعلم المعزز فيعتمد على التفاعل مع البيئة والمكافآت والعقوبات لتحسين القرارات.',
+        rationale: 'تُستخدم الأنواع الثلاثة بصورة متكاملة في تصنيف التهديدات المعروفة واكتشاف الشذوذ الجديد وتحسين الاستجابة.',
+      },
+      {
+        id: 'qa-4',
+        chapter: 'الفصل الثالث',
+        question: 'ما الفارق بين أنظمة IDS وأنظمة IDPS، وما ميزة الكشف القائم على السلوك؟',
+        answer: 'يقوم نظام IDS بمراقبة النشاط واكتشاف التسلل وإصدار التنبيهات، بينما يضيف نظام IDPS القدرة على المنع والاعتراض المباشر للحركة الضارة. ويمتاز الكشف السلوكي بقدرته على رصد الانحراف عن السلوك الطبيعي حتى للهجمات الجديدة التي لا تملك توقيعاً مسبقاً.',
+        rationale: 'الجمع بين الفحص التقليدي والكشف السلوكي الذكي يوفر حماية أعمق ضد الهجمات المعروفة وهجمات يوم الصفر.',
+      },
+      {
+        id: 'qa-5',
+        chapter: 'الفصل الرابع',
+        question: 'كيف يساعد الذكاء الاصطناعي في كشف البرمجيات الخبيثة متعددة الأشكال والتصيد الذكي؟',
+        answer: 'يفحص الذكاء الاصطناعي السلوك الفعلي للملفات أثناء التنفيذ بدلاً من الاكتفاء بالتوقيع الثابت، كما يحلل لغة رسائل البريد وبنية الروابط وسمعة النطاقات لكشف محاولات التصيد الاحتيالي المتقنة.',
+        rationale: 'الاعتماد على المؤشرات السلوكية والنصية يحدّ من قدرة المهاجمين على التخفي بتغيير التواقيع.',
+      },
+      {
+        id: 'qa-6',
+        chapter: 'الفصل الخامس',
+        question: 'بيّن أوجه التكامل بين منظومة SIEM ومنظومة SOAR في مراكز العمليات الأمنية.',
+        answer: 'تجمع منصة SIEM السجلات من مختلف المصادر وتوحّدها وتربط الأحداث لاكتشاف الحوادث وتوليد التنبيهات، ثم تتولى منصة SOAR تنسيق الأدوات وأتمتة خطوات الاحتواء والاستجابة عبر مسارات عمل (Playbooks).',
+        rationale: 'هذا التكامل يقلص زمن الاكتشاف والاستجابة ويخفف عبء المهام المتكررة عن المحللين.',
+      },
+      {
+        id: 'qa-7',
+        chapter: 'الفصل السادس',
+        question: 'فرّق بين الهجمات المعادية (Adversarial Attacks) وتسميم البيانات (Data Poisoning)، واذكر فائدة التعلم الفدرالي.',
+        answer: 'تخدع الهجمات المعادية النموذج أثناء التشغيل بمدخلات مموهة، بينما يفسد تسميم البيانات مجموعة التدريب لتشويه تعلم النموذج. ويساعد التعلم الفدرالي في تدريب النماذج محلياً وتبادل التحديثات دون نقل البيانات الخام الحساسة.',
+        rationale: 'حماية سلامة البيانات والنماذج والخصوصية تمثل ركيزة أساسية لاعتماد الذكاء الاصطناعي في البيئات الحساسة.',
+      },
+    ];
+
+    /**
+     * المصادر والمراجع العلمية
+     */
+    const REFERENCES = [
+      {
+        num: 1,
+        citation: 'Russell, S., & Norvig, P. (2020). Artificial Intelligence: A Modern Approach (4th ed.). Pearson.',
+      },
+      {
+        num: 2,
+        citation: 'Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.',
+      },
+      {
+        num: 3,
+        citation: 'Bishop, C. M. (2006). Pattern Recognition and Machine Learning. Springer.',
+      },
+      {
+        num: 4,
+        citation: 'Stallings, W. (2020). Cryptography and Network Security: Principles and Practice (8th ed.). Pearson.',
+      },
+      {
+        num: 5,
+        citation: 'Buczak, A. L., & Guven, E. (2016). A Survey of Data Mining and Machine Learning Methods for Cyber Security Intrusion Detection. IEEE Communications Surveys & Tutorials.',
+      },
+      {
+        num: 6,
+        citation: 'Sommer, R., & Paxson, V. (2010). Outside the Closed World: On Using Machine Learning for Network Intrusion Detection. IEEE Symposium on Security and Privacy.',
+      },
+      {
+        num: 7,
+        citation: 'McMahan, B., Moore, E., Ramage, D., Hampson, S., & y Arcas, B. A. (2017). Communication-Efficient Learning of Deep Networks from Decentralized Data. AISTATS.',
+      },
+      {
+        num: 8,
+        citation: 'National Institute of Standards and Technology (NIST). (2024). Cybersecurity Framework (CSF) & Artificial Intelligence Risk Management Framework (AI RMF). U.S. Department of Commerce.',
+      },
+    ];
+
+    /**
+     * حالة التطبيق التفاعلية
+     */
+    const STATE = {
+      currentRoute: 'home',
+      selectedChapterId: 'ch1',
+      chapterSearch: '',
+      testMode: 'daily',
+      testIndex: 0,
+      userAnswers: {},
+      testSubmitted: false,
+      highScores: {},
+      qaChapterFilter: 'all',
+      revealedAnswers: {},
+      refSearch: '',
+      heroAnimFrame: null,
+    };
+
+    // تحميل أعلى الدرجات المحفوظة بأمان من localStorage
+    function loadHighScores() {
+      try {
+        const saved = localStorage.getItem('cyber_ai_high_scores_v2');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') {
+            STATE.highScores = parsed;
+          }
+        }
+      } catch (err) {
+        STATE.highScores = {};
+      }
+    }
+
+    function updateHighScore(mode, correctCount, totalCount) {
+      try {
+        const pct = Math.round((correctCount / totalCount) * 100);
+        const prev = STATE.highScores[mode];
+        if (!prev || pct >= prev.percentage) {
+          STATE.highScores[mode] = {
+            score: `${correctCount}/${totalCount}`,
+            percentage: pct,
+            date: new Date().toLocaleDateString('ar-IQ'),
+          };
+          localStorage.setItem('cyber_ai_high_scores_v2', JSON.stringify(STATE.highScores));
+        }
+      } catch (err) {
+        // تجاهل قيود التخزين المحلي إن وجدت
+      }
+    }
+
+    // إشعار لطيف بديل عن alert()
+    let toastTimer = null;
+    function showToast(text) {
+      const banner = document.getElementById('toastBanner');
+      const msg = document.getElementById('toastMessage');
+      if (!banner || !msg) return;
+      msg.textContent = text;
+      banner.classList.remove('hidden');
+      banner.classList.add('flex');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(hideToast, 2600);
+    }
+
+    function hideToast() {
+      const banner = document.getElementById('toastBanner');
+      if (!banner) return;
+      banner.classList.add('hidden');
+      banner.classList.remove('flex');
+    }
+
+    // نسخ نص إلى الحافظة
+    function copyTextToClipboard(text, message = 'تم نسخ النص إلى الحافظة') {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (ok) {
+          showToast(message);
+          return;
+        }
+      } catch (err) {
+        // محاولة احتياطية
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          () => showToast(message),
+          () => showToast('تعذر النسخ تلقائياً، يرجى تحديد النص ونسخه يدوياً')
+        );
+      }
+    }
+
+    // قائمة الجوال
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const openIcon = document.getElementById('menuIconOpen');
+      const closeIcon = document.getElementById('menuIconClose');
+      if (!menu) return;
+      const isHidden = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', !isHidden);
+      if (openIcon) openIcon.classList.toggle('hidden', isHidden);
+      if (closeIcon) closeIcon.classList.toggle('hidden', !isHidden);
+    }
+
+    function navigateAndClose(route) {
+      const menu = document.getElementById('mobileMenu');
+      const openIcon = document.getElementById('menuIconOpen');
+      const closeIcon = document.getElementById('menuIconClose');
+      if (menu) menu.classList.add('hidden');
+      if (openIcon) openIcon.classList.remove('hidden');
+      if (closeIcon) closeIcon.classList.add('hidden');
+      navigateTo(route);
+    }
+
+    function syncActiveNav(route) {
+      document.querySelectorAll('[data-nav]').forEach((btn) => {
+        const isActive = btn.getAttribute('data-nav') === route;
+        btn.classList.toggle('ring-2', isActive);
+        btn.classList.toggle('ring-sky-400/75', isActive);
+        btn.classList.toggle('bg-sky-500/15', isActive);
+        btn.classList.toggle('text-sky-200', isActive);
+      });
+    }
+
+    function navigateTo(route, chapterId = null) {
+      STATE.currentRoute = route;
+      if (chapterId) {
+        STATE.selectedChapterId = chapterId;
+      }
+      renderCurrentView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // نافذة تكبير الرسم التوضيحي
+    function openFigureModal(figId) {
+      const fig = FIGURES.find((f) => f.id === figId);
+      const modal = document.getElementById('figureModal');
+      if (!fig || !modal) return;
+      document.getElementById('modalFigureChapter').textContent = fig.chapter;
+      document.getElementById('modalFigureTitle').textContent = fig.title;
+      document.getElementById('modalFigureBody').innerHTML = fig.svg;
+      document.getElementById('modalFigureCaption').textContent = fig.caption;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeFigureModal() {
+      const modal = document.getElementById('figureModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.addEventListener('click', (e) => {
+      const modal = document.getElementById('figureModal');
+      if (modal && !modal.classList.contains('hidden') && e.target === modal) {
+        closeFigureModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeFigureModal();
+      }
+    });
+
+    /**
+     * تهيئة الهوية البصرية التفاعلية في الشاشة الرئيسية:
+     * 1. شبكة نقاط وعقد تفاعلية خفيفة تستجيب لحركة المؤشر واللمس (Interactive Canvas Neural-Cyber Shield)
+     * 2. إمالة ثلاثية الأبعاد ناعمة (3D Subtle Tilt) للشعار المركزي
+     */
+    function stopHeroVisuals() {
+      if (STATE.heroAnimFrame) {
+        cancelAnimationFrame(STATE.heroAnimFrame);
+        STATE.heroAnimFrame = null;
+      }
+    }
+
+    function initHeroInteractiveVisuals() {
+      stopHeroVisuals();
+      const heroBox = document.getElementById('heroInteractiveSection');
+      const canvas = document.getElementById('heroNeuralCanvas');
+      const shieldEl = document.getElementById('heroShieldLogo');
+
+      if (!heroBox || !canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      let width = 0;
+      let height = 0;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      // إحداثيات المؤشر أو اللمس
+      const pointer = {
+        x: -9999,
+        y: -9999,
+        active: false,
+      };
+
+      // عدد عقد مدروس للحفاظ على البساطة والنعومة الفائقة على الهواتف والحواسيب
+      let nodes = [];
+
+      function buildNodes() {
+        const count = width < 640 ? 22 : 34;
+        nodes = Array.from({ length: count }, (_, idx) => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.36,
+          vy: (Math.random() - 0.5) * 0.36,
+          r: idx % 4 === 0 ? 2.4 : 1.7,
+          isEmerald: idx % 3 === 0,
+        }));
+      }
+
+      function resizeCanvas() {
+        const rect = heroBox.getBoundingClientRect();
+        width = Math.max(280, Math.floor(rect.width));
+        height = Math.max(320, Math.floor(rect.height));
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (!nodes.length) {
+          buildNodes();
+        }
+      }
+
+      resizeCanvas();
+
+      // تحديث موقع المؤشر/اللمس وتأثير الإمالة الثلاثية الأبعاد للشعار المركزي
+      function updatePointerPosition(clientX, clientY) {
+        const rect = heroBox.getBoundingClientRect();
+        pointer.x = clientX - rect.left;
+        pointer.y = clientY - rect.top;
+        pointer.active = true;
+
+        if (shieldEl) {
+          const normX = (pointer.x / rect.width - 0.5) * 2; // من -1 إلى 1
+          const normY = (pointer.y / rect.height - 0.5) * 2;
+          const rotateY = Math.max(-12, Math.min(12, normX * 11));
+          const rotateX = Math.max(-12, Math.min(12, -normY * 11));
+          shieldEl.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(6px)`;
+        }
+      }
+
+      function resetPointerPosition() {
+        pointer.active = false;
+        pointer.x = -9999;
+        pointer.y = -9999;
+        if (shieldEl) {
+          shieldEl.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        }
+      }
+
+      heroBox.addEventListener('mousemove', (e) => {
+        updatePointerPosition(e.clientX, e.clientY);
+      }, { passive: true });
+
+      heroBox.addEventListener('mouseleave', resetPointerPosition, { passive: true });
+
+      heroBox.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+          updatePointerPosition(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      heroBox.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) {
+          updatePointerPosition(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      heroBox.addEventListener('touchend', resetPointerPosition, { passive: true });
+
+      window.addEventListener('resize', () => {
+        if (STATE.currentRoute === 'home' && document.getElementById('heroNeuralCanvas')) {
+          resizeCanvas();
+        }
+      }, { passive: true });
+
+      function animateNetwork() {
+        if (STATE.currentRoute !== 'home' || !document.getElementById('heroNeuralCanvas')) {
+          stopHeroVisuals();
+          return;
+        }
+
+        ctx.clearRect(0, 0, width, height);
+
+        // رسم هالة ضوئية خفيفة جداً تتبع المؤشر
+        if (pointer.active) {
+          const glow = ctx.createRadialGradient(pointer.x, pointer.y, 4, pointer.x, pointer.y, 170);
+          glow.addColorStop(0, 'rgba(56, 189, 248, 0.14)');
+          glow.addColorStop(0.55, 'rgba(16, 185, 129, 0.05)');
+          glow.addColorStop(1, 'rgba(7, 11, 20, 0)');
+          ctx.fillStyle = glow;
+          ctx.fillRect(0, 0, width, height);
+        }
+
+        // تحديث مواقع العقد
+        for (let i = 0; i < nodes.length; i += 1) {
+          const n = nodes[i];
+          n.x += n.vx;
+          n.y += n.vy;
+
+          if (n.x <= 8 || n.x >= width - 8) n.vx *= -1;
+          if (n.y <= 8 || n.y >= height - 8) n.vy *= -1;
+
+          // انجذاب لطيف جداً نحو المؤشر
+          if (pointer.active) {
+            const dx = pointer.x - n.x;
+            const dy = pointer.y - n.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist > 28 && dist < 155) {
+              n.x += (dx / dist) * 0.22;
+              n.y += (dy / dist) * 0.22;
+            }
+          }
+        }
+
+        // رسم الروابط الضوئية الهادئة بين العقد القريبة
+        const maxLinkDist = width < 640 ? 115 : 145;
+        for (let i = 0; i < nodes.length; i += 1) {
+          for (let j = i + 1; j < nodes.length; j += 1) {
+            const a = nodes[i];
+            const b = nodes[j];
+            const dist = Math.hypot(a.x - b.x, a.y - b.y);
+            if (dist < maxLinkDist) {
+              const alpha = (1 - dist / maxLinkDist) * 0.22;
+              ctx.strokeStyle = `rgba(56, 189, 248, ${alpha.toFixed(3)})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+
+          // ربط العقد القريبة من المؤشر بخط أخضر زمردي ناعم
+          if (pointer.active) {
+            const n = nodes[i];
+            const pDist = Math.hypot(pointer.x - n.x, pointer.y - n.y);
+            if (pDist < 150) {
+              const pAlpha = (1 - pDist / 150) * 0.42;
+              ctx.strokeStyle = `rgba(16, 185, 129, ${pAlpha.toFixed(3)})`;
+              ctx.lineWidth = 1.15;
+              ctx.beginPath();
+              ctx.moveTo(n.x, n.y);
+              ctx.lineTo(pointer.x, pointer.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // رسم العقد
+        for (let i = 0; i < nodes.length; i += 1) {
+          const n = nodes[i];
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = n.isEmerald
+            ? 'rgba(16, 185, 129, 0.72)'
+            : 'rgba(56, 189, 248, 0.72)';
+          ctx.fill();
+        }
+
+        STATE.heroAnimFrame = requestAnimationFrame(animateNetwork);
+      }
+
+      STATE.heroAnimFrame = requestAnimationFrame(animateNetwork);
+    }
+
+    /**
+     * بناء الشاشة الرئيسية (Hero Section + المؤشرات الإحصائية + بطاقات الفصول السريعة)
+     */
+    function renderHomeView() {
+      const quickChaptersHtml = CHAPTERS.map((ch) => `
+        <article class="glass-card rounded-2xl p-5 flex flex-col justify-between gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-sky-400/12 text-sky-300 border border-sky-400/25">
+                ${ch.shortTitle}
+              </span>
+              <span class="text-[11px] text-slate-400">${ch.objectives.length} أهداف تعليمية</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-extrabold text-white leading-snug">${ch.title}</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${ch.summary}</p>
+          </div>
+          <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+            <button type="button" onclick="navigateTo('chapters', '${ch.id}')" class="px-4 py-2 rounded-xl text-xs font-extrabold bg-sky-400/15 hover:bg-sky-400/25 text-sky-200 border border-sky-400/35 transition-colors">
+              استعراض الفصل
+            </button>
+            <button type="button" onclick="openQAForChapter('${ch.shortTitle}')" class="px-3 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700/80">
+              الأسئلة المحلولة
+            </button>
+          </div>
+        </article>
+      `).join('');
+
+      return `
+        <section class="animate-view space-y-8">
+          <!-- قسم البطل التفاعلي البسيط والمؤثر (Interactive Hero Section) -->
+          <div id="heroInteractiveSection" class="relative rounded-3xl overflow-hidden border border-sky-400/25 bg-[#090F1D]/90 shadow-2xl">
+            <!-- شبكة العقد التفاعلية الخلفية -->
+            <canvas id="heroNeuralCanvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+            <!-- محتوى الواجهة الرئيسية المتوازن -->
+            <div class="relative z-10 px-5 py-10 sm:px-10 sm:py-14 lg:py-16 max-w-5xl mx-auto flex flex-col items-center text-center space-y-6">
+              <!-- شارة المنهج العلوية -->
+              <div class="inline-flex flex-wrap items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/85 border border-sky-400/30 text-xs font-bold text-sky-200">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>${BOOK_META.subtitle}</span>
+              </div>
+
+              <!-- الشعار البصري المركزي التفاعلي (درع سيبراني هندسي + عقدة ذكاء اصطناعي نابضة) -->
+              <div class="shield-stage py-1">
+                <div id="heroShieldLogo" class="shield-interactive w-28 h-28 sm:w-32 sm:h-32 mx-auto rounded-3xl bg-gradient-to-b from-sky-400/12 via-slate-900/90 to-emerald-400/12 border border-sky-400/35 shadow-[0_0_45px_-10px_rgba(56,189,248,0.35)] flex items-center justify-center">
+                  <svg class="w-20 h-20 sm:w-24 sm:h-24" viewBox="0 0 120 120" fill="none" aria-label="شعار الدرع السيبراني والذكاء الاصطناعي">
+                    <defs>
+                      <linearGradient id="shieldStrokeGrad" x1="18" y1="14" x2="102" y2="108" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#38BDF8" />
+                        <stop offset="100%" stop-color="#10B981" />
+                      </linearGradient>
+                      <radialGradient id="coreGlowGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.45" />
+                        <stop offset="100%" stop-color="#10B981" stop-opacity="0" />
+                      </radialGradient>
+                    </defs>
+
+                    <!-- هالة داخلية ناعمة -->
+                    <circle cx="60" cy="58" r="34" fill="url(#coreGlowGrad)" />
+
+                    <!-- الدرع الهندسي الخارجي -->
+                    <path
+                      d="M60 14L96 29V57C96 80.5 80.7 99.8 60 107C39.3 99.8 24 80.5 24 57V29L60 14Z"
+                      fill="#070B14"
+                      fill-opacity="0.72"
+                      stroke="url(#shieldStrokeGrad)"
+                      stroke-width="2.6"
+                      stroke-linejoin="round"
+                    />
+
+                    <!-- إطار داخلي دقيق للدرع -->
+                    <path
+                      d="M60 22L89 34.2V56.8C89 76.2 76.6 92.2 60 98.4C43.4 92.2 31 76.2 31 56.8V34.2L60 22Z"
+                      stroke="#38BDF8"
+                      stroke-opacity="0.28"
+                      stroke-width="1.2"
+                    />
+
+                    <!-- حلقة مدارية بطيئة الدوران حول عقدة AI -->
+                    <circle
+                      cx="60"
+                      cy="58"
+                      r="20"
+                      stroke="#10B981"
+                      stroke-opacity="0.45"
+                      stroke-width="1.2"
+                      stroke-dasharray="4 5"
+                      class="ai-orbit-slow"
+                    />
+
+                    <!-- مسارات عصبية متصلة بالعقدة المركزية -->
+                    <g stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" opacity="0.85">
+                      <line x1="60" y1="47" x2="60" y2="35" />
+                      <line x1="60" y1="69" x2="60" y2="81" />
+                      <line x1="49" y1="58" x2="38" y2="58" />
+                      <line x1="71" y1="58" x2="82" y2="58" />
+                      <line x1="52" y1="50" x2="44" y2="42" />
+                      <line x1="68" y1="50" x2="76" y2="42" />
+                    </g>
+
+                    <!-- عقد طرفية صغيرة -->
+                    <circle cx="60" cy="34" r="2.6" fill="#10B981" />
+                    <circle cx="60" cy="82" r="2.6" fill="#38BDF8" />
+                    <circle cx="37" cy="58" r="2.6" fill="#38BDF8" />
+                    <circle cx="83" cy="58" r="2.6" fill="#10B981" />
+                    <circle cx="43" cy="41" r="2.2" fill="#38BDF8" />
+                    <circle cx="77" cy="41" r="2.2" fill="#10B981" />
+
+                    <!-- النواة المركزية النابضة للذكاء الاصطناعي -->
+                    <g class="ai-core-pulse">
+                      <circle cx="60" cy="58" r="10.5" fill="#0D1424" stroke="url(#shieldStrokeGrad)" stroke-width="2.4" />
+                      <circle cx="60" cy="58" r="4.2" fill="#10B981" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- العنوان الرئيسي البارز والمؤثر -->
+              <div class="space-y-3 max-w-3xl">
+                <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-black tracking-tight leading-[1.2] bg-gradient-to-l from-white via-sky-200 to-emerald-300 bg-clip-text text-transparent">
+                  ${BOOK_META.title}
+                </h1>
+                <p class="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                  ${BOOK_META.tagline}
+                </p>
+              </div>
+
+              <!-- أزرار الوصول السريع النظيفة -->
+              <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
+                <button type="button" onclick="navigateTo('chapters', 'ch1')" class="px-6 py-3 rounded-2xl text-xs sm:text-sm font-extrabold bg-gradient-to-l from-sky-400 to-emerald-400 text-slate-950 hover:opacity-95 shadow-lg shadow-sky-500/20 transition-all">
+                  ابدأ رحلة التعلم
+                </button>
+              <!-- بطاقة الإسناد والمؤلفين الأنيقة والواضحة في الواجهة الرئيسية -->
+              <div class="pt-2 w-full max-w-2xl space-y-2.5">
+                <div class="rounded-2xl bg-slate-950/85 border border-sky-400/30 px-4 py-3 backdrop-blur-sm">
+                  <p class="text-xs sm:text-sm font-extrabold text-sky-200 tracking-wide">
+                    ${BOOK_META.attribution}
+                  </p>
+                </div>
+                <div class="rounded-2xl bg-slate-950/75 border border-slate-800 px-4 py-3 text-center space-y-1.5">
+                  <div class="text-[11px] font-bold text-emerald-300">
+                    ${BOOK_META.ministry} • ${BOOK_META.edition}
+                  </div>
+                  <div class="text-xs text-slate-300 leading-relaxed">
+                    <span class="font-bold text-white">تأليف:</span> ${BOOK_META.authors.join(' • ')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- مؤشرات إحصائية تفاعلية بسيطة أسفل الواجهة الرئيسية -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <button type="button" onclick="navigateTo('chapters')" class="glass-card rounded-2xl p-4 sm:p-5 text-right group">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl sm:text-3xl font-black text-sky-300">6</span>
+                <span class="text-xs font-bold text-sky-400/80 group-hover:translate-x-[-2px] transition-transform">استعراض ←</span>
+              </div>
+              <div class="text-xs sm:text-sm font-extrabold text-white mt-1.5">فصول منهجية</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">شروحات مركزة وأهداف وجداول</div>
+            </button>
+
+            <button type="button" onclick="navigateTo('tests')" class="glass-card rounded-2xl p-4 sm:p-5 text-right group">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl sm:text-3xl font-black text-emerald-300">4</span>
+                <span class="text-xs font-bold text-emerald-400/80 group-hover:translate-x-[-2px] transition-transform">ابدأ ←</span>
+              </div>
+              <div class="text-xs sm:text-sm font-extrabold text-white mt-1.5">مستويات اختبار</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">يومي، شهري، نصف سنة، آخر سنة</div>
+            </button>
+
+            <button type="button" onclick="navigateTo('figures')" class="glass-card rounded-2xl p-4 sm:p-5 text-right group">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl sm:text-3xl font-black text-sky-300">${FIGURES.length}</span>
+                <span class="text-xs font-bold text-sky-400/80 group-hover:translate-x-[-2px] transition-transform">تكبير ←</span>
+              </div>
+              <div class="text-xs sm:text-sm font-extrabold text-white mt-1.5">رسومات تفاعلية</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">مخططات SVG عالية الدقة</div>
+            </button>
+
+            <button type="button" onclick="navigateTo('qa')" class="glass-card rounded-2xl p-4 sm:p-5 text-right group">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl sm:text-3xl font-black text-amber-300">${SOLVED_QUESTIONS.length + REFERENCES.length}</span>
+                <span class="text-xs font-bold text-amber-400/80 group-hover:translate-x-[-2px] transition-transform">تصفح ←</span>
+              </div>
+              <div class="text-xs sm:text-sm font-extrabold text-white mt-1.5">أسئلة محلولة ومصادر</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">حلول نموذجية ومراجع أكاديمية</div>
+            </button>
+          </div>
+
+          <!-- نظرة سريعة على الفصول الدراسية الستة -->
+          <div class="space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h2 class="text-lg sm:text-xl font-extrabold text-white">فصول المنهج الدراسي</h2>
+                <p class="text-xs text-slate-400">اختر أي فصل للانتقال المباشر إلى ملخصاته وأهدافه وجداوله</p>
+              </div>
+              <button type="button" onclick="navigateTo('chapters')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-slate-900 hover:bg-slate-800 text-sky-300 border border-slate-700/80">
+                فتح صفحة الفصول الكاملة
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              ${quickChaptersHtml}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    /**
+     * صفحة الفصول الدراسية الستة مع بحث فوري وعرض تفاصيل وملخصات منظمة
+     */
+    function selectChapter(chapterId) {
+      STATE.selectedChapterId = chapterId;
+      renderCurrentView();
+    }
+
+    function handleChapterSearch(val) {
+      STATE.chapterSearch = val;
+      renderCurrentView();
+    }
+
+    function renderChaptersView() {
+      const q = STATE.chapterSearch.trim().toLowerCase();
+      const matchingChapters = CHAPTERS.filter((ch) => {
+        if (!q) return true;
+        const inTitle = ch.title.toLowerCase().includes(q) || ch.summary.toLowerCase().includes(q);
+        const inTopics = ch.topics.some(
+          (t) => t.heading.toLowerCase().includes(q) || t.points.some((p) => p.toLowerCase().includes(q))
+        );
+        return inTitle || inTopics;
+      });
+
+      const activeChapter =
+        matchingChapters.find((c) => c.id === STATE.selectedChapterId) ||
+        matchingChapters[0] ||
+        CHAPTERS[0];
+
+      const tabsHtml = matchingChapters.map((ch) => {
+        const isSelected = ch.id === activeChapter.id;
+        return `
+          <button type="button" onclick="selectChapter('${ch.id}')" class="px-3.5 py-2.5 rounded-xl text-xs font-extrabold transition-colors text-right ${
+            isSelected
+              ? 'bg-sky-400 text-slate-950'
+              : 'bg-slate-900/90 text-slate-300 hover:bg-slate-800 border border-slate-800'
+          }">
+            ${ch.shortTitle}
+          </button>
+        `;
+      }).join('');
+
+      const objectivesHtml = activeChapter.objectives.map((obj, idx) => `
+        <li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200 leading-relaxed">
+          <span class="w-5 h-5 rounded-md bg-sky-400/15 text-sky-300 border border-sky-400/30 text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
+          <span>${obj}</span>
+        </li>
+      `).join('');
+
+      const topicsHtml = activeChapter.topics.map((topic) => `
+        <div class="glass-card rounded-2xl p-5 space-y-3">
+          <h3 class="text-base sm:text-lg font-extrabold text-sky-300">${topic.heading}</h3>
+          <ul class="space-y-2">
+            ${topic.points.map((pt) => `
+              <li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0"></span>
+                <span>${pt}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('');
+
+      const tableHeaders = activeChapter.table.headers.map((h) => `
+        <th class="px-4 py-3 text-right text-xs font-extrabold text-sky-200 bg-slate-900 border-b border-slate-700">${h}</th>
+      `).join('');
+
+      const tableRows = activeChapter.table.rows.map((row) => `
+        <tr class="hover:bg-slate-900/50">
+          ${row.map((cell, i) => `
+            <td class="px-4 py-3 text-xs sm:text-sm ${i === 0 ? 'font-bold text-white' : 'text-slate-300'} border-b border-slate-800/70 leading-relaxed">${cell}</td>
+          `).join('')}
+        </tr>
+      `).join('');
+
+      return `
+        <section class="animate-view space-y-6">
+          <div class="glass-card rounded-3xl p-5 sm:p-7 space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div>
+                <h1 class="text-xl sm:text-3xl font-extrabold text-white">الفصول الدراسية الستة</h1>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1">ابحث داخل محتوى المنهج أو تنقل بين الفصول لعرض الأهداف والملخصات والجداول.</p>
+              </div>
+              <input
+                type="search"
+                value="${STATE.chapterSearch.replace(/"/g, '&quot;')}"
+                oninput="handleChapterSearch(this.value)"
+                placeholder="ابحث في الفصول (مثلاً: IDS، التصيد، SIEM، الفدرالي...)"
+                class="w-full md:w-80 px-4 py-2.5 rounded-xl bg-slate-950/90 border border-slate-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+              />
+            </div>
+
+            <div class="flex flex-wrap gap-2 pt-1">
+              ${tabsHtml || '<span class="text-xs text-amber-300">لا توجد فصول مطابقة لعبارة البحث.</span>'}
+            </div>
+          </div>
+
+          <div class="glass-card rounded-3xl p-5 sm:p-7 border border-sky-400/25 space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-sky-400/15 text-sky-300 border border-sky-400/30">
+                ${activeChapter.shortTitle} من 6
+              </span>
+              <div class="flex flex-wrap gap-2">
+                <button type="button" onclick="openQAForChapter('${activeChapter.shortTitle}')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 border border-amber-400/35">
+                  الأسئلة المحلولة للفصل
+                </button>
+                <button type="button" onclick="navigateTo('tests')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-200 border border-emerald-400/35">
+                  اختبر فهمك
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <h2 class="text-xl sm:text-2xl font-extrabold text-white">${activeChapter.title}</h2>
+              <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">${activeChapter.summary}</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-950/70 border border-emerald-500/20 space-y-3">
+              <h3 class="text-sm sm:text-base font-extrabold text-emerald-300">الأهداف التعليمية الخاصة بالفصل</h3>
+              <ul class="space-y-2">${objectivesHtml}</ul>
+            </div>
+
+            <div class="space-y-4">
+              ${topicsHtml}
+            </div>
+
+            <div class="space-y-2.5">
+              <h3 class="text-sm sm:text-base font-extrabold text-white">جدول ملخص ومقارنة منهجية</h3>
+              <div class="overflow-x-auto rounded-xl border border-slate-800">
+                <table class="w-full border-collapse min-w-[520px]">
+                  <thead><tr>${tableHeaders}</tr></thead>
+                  <tbody>${tableRows}</tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    /**
+     * صفحة الاختبارات التفاعلية (4 مستويات + تصحيح فوري + تعليل + أعلى الدرجات في localStorage)
+     */
+    function getModeQuestions() {
+      return TEST_BANK.filter((q) => q.category === STATE.testMode);
+    }
+
+    function setTestMode(mode) {
+      STATE.testMode = mode;
+      STATE.testIndex = 0;
+      STATE.userAnswers = {};
+      STATE.testSubmitted = false;
+      renderCurrentView();
+    }
+
+    function selectAnswer(questionId, optIdx) {
+      if (STATE.testSubmitted) return;
+      STATE.userAnswers[questionId] = optIdx;
+      renderCurrentView();
+    }
+
+    function jumpToTestQuestion(idx) {
+      const list = getModeQuestions();
+      if (idx >= 0 && idx < list.length) {
+        STATE.testIndex = idx;
+        renderCurrentView();
+      }
+    }
+
+    function gradeTest() {
+      const questions = getModeQuestions();
+      if (!questions.length || STATE.testSubmitted) return;
+      STATE.testSubmitted = true;
+
+      let correct = 0;
+      questions.forEach((q) => {
+        if (STATE.userAnswers[q.id] === q.correct) correct += 1;
+      });
+
+      updateHighScore(STATE.testMode, correct, questions.length);
+      const pct = Math.round((correct / questions.length) * 100);
+      showToast(`اكتمل التصحيح: نتيجتك ${correct} من ${questions.length} (${pct}%)`);
+      renderCurrentView();
+    }
+
+    function restartTest() {
+      STATE.testIndex = 0;
+      STATE.userAnswers = {};
+      STATE.testSubmitted = false;
+      renderCurrentView();
+    }
+
+    function renderTestsView() {
+      const modes = [
+        { key: 'daily', label: 'اختبار يومي' },
+        { key: 'monthly', label: 'اختبار شهري' },
+        { key: 'midterm', label: 'امتحان نصف السنة' },
+        { key: 'final', label: 'امتحان آخر السنة' },
+      ];
+
+      const questions = getModeQuestions();
+      const currentQ = questions[STATE.testIndex] || questions[0];
+      const answeredCount = questions.filter((q) => STATE.userAnswers[q.id] !== undefined).length;
+
+      let correctCount = 0;
+      if (STATE.testSubmitted) {
+        questions.forEach((q) => {
+          if (STATE.userAnswers[q.id] === q.correct) correctCount += 1;
+        });
+      }
+      const percentage = questions.length ? Math.round((correctCount / questions.length) * 100) : 0;
+
+      const modeBtnsHtml = modes.map((m) => {
+        const active = STATE.testMode === m.key;
+        const best = STATE.highScores[m.key];
+        return `
+          <button type="button" onclick="setTestMode('${m.key}')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-colors ${
+            active
+              ? 'bg-emerald-400 text-slate-950'
+              : 'bg-slate-900 text-slate-200 hover:bg-slate-800 border border-slate-700/80'
+          }">
+            <span>${m.label}</span>
+            ${best ? `<span class="text-[10px] px-1.5 py-0.5 rounded-md ${active ? 'bg-slate-950/20 text-slate-950' : 'bg-emerald-500/15 text-emerald-300'}">أعلى: ${best.percentage}%</span>` : ''}
+          </button>
+        `;
+      }).join('');
+
+      const navDotsHtml = questions.map((q, idx) => {
+        const isCurrent = idx === STATE.testIndex;
+        const isAnswered = STATE.userAnswers[q.id] !== undefined;
+        let cls = 'bg-slate-900 text-slate-300 border-slate-700';
+        if (STATE.testSubmitted) {
+          cls = STATE.userAnswers[q.id] === q.correct
+            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/50'
+            : 'bg-rose-500/20 text-rose-300 border-rose-400/50';
+        } else if (isCurrent) {
+          cls = 'bg-sky-400 text-slate-950 border-sky-300 font-extrabold';
+        } else if (isAnswered) {
+          cls = 'bg-sky-500/15 text-sky-200 border-sky-400/40';
+        }
+        return `
+          <button type="button" onclick="jumpToTestQuestion(${idx})" class="w-9 h-9 rounded-xl text-xs font-bold border ${cls}">
+            ${idx + 1}
+          </button>
+        `;
+      }).join('');
+
+      const optionsHtml = currentQ ? currentQ.options.map((opt, idx) => {
+        const selected = STATE.userAnswers[currentQ.id] === idx;
+        const isCorrect = currentQ.correct === idx;
+        let cls = 'bg-slate-900/85 border-slate-800 hover:border-sky-400/50 text-slate-200';
+        if (STATE.testSubmitted) {
+          if (isCorrect) {
+            cls = 'bg-emerald-950/60 border-emerald-400 text-emerald-200';
+          } else if (selected && !isCorrect) {
+            cls = 'bg-rose-950/60 border-rose-400 text-rose-200';
+          } else {
+            cls = 'bg-slate-900/45 border-slate-800/70 text-slate-400';
+          }
+        } else if (selected) {
+          cls = 'bg-sky-500/15 border-sky-400 text-white';
+        }
+        return `
+          <button type="button" onclick="selectAnswer('${currentQ.id}', ${idx})" class="w-full text-right p-4 rounded-2xl border transition-all flex items-start gap-3 ${cls}">
+            <span class="w-6 h-6 rounded-lg border border-current/40 text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
+            <span class="text-xs sm:text-sm font-semibold leading-relaxed">${opt}</span>
+          </button>
+        `;
+      }).join('') : '';
+
+      const highScoresSummary = modes.map((m) => {
+        const record = STATE.highScores[m.key];
+        return `
+          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-300">${m.label}</span>
+            <span class="text-xs font-extrabold ${record ? 'text-emerald-300' : 'text-slate-500'}">
+              ${record ? `${record.score} (${record.percentage}%)` : 'لم يُختبر بعد'}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <section class="animate-view space-y-6">
+          <div class="glass-card rounded-3xl p-5 sm:p-7 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h1 class="text-xl sm:text-3xl font-extrabold text-white">الاختبارات التفاعلية</h1>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1">اختر مستوى الاختبار، وأجب عن الأسئلة للحصول على التصحيح الفوري والتعليل المنهجي.</p>
+              </div>
+              <div class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs font-extrabold text-sky-300">
+                المُجاب: ${answeredCount} / ${questions.length}
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              ${modeBtnsHtml}
+            </div>
+          </div>
+
+          ${STATE.testSubmitted ? `
+            <div class="glass-card rounded-2xl p-5 sm:p-6 border border-emerald-400/40 bg-emerald-950/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <div class="text-xs font-extrabold text-emerald-300">نتيجة الاختبار</div>
+                <div class="text-xl sm:text-2xl font-extrabold text-white mt-1">
+                  درجتك: ${correctCount} من ${questions.length} (${percentage}%)
+                </div>
+                <p class="text-xs text-slate-300 mt-1">يمكنك مراجعة جميع الأسئلة أدناه لرؤية الإجابة الصحيحة والتعليل.</p>
+              </div>
+              <button type="button" onclick="restartTest()" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-emerald-400 text-slate-950 hover:bg-emerald-300 shrink-0">
+                إعادة الاختبار
+              </button>
+            </div>
+          ` : ''}
+
+          ${currentQ ? `
+            <div class="glass-card rounded-3xl p-5 sm:p-7 space-y-5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="px-3 py-1 rounded-xl text-xs font-extrabold bg-sky-400/15 text-sky-300 border border-sky-400/30">
+                    سؤال ${STATE.testIndex + 1} من ${questions.length}
+                  </span>
+                  <span class="px-3 py-1 rounded-xl text-xs font-bold bg-slate-800 text-slate-300">${currentQ.chapter}</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5">${navDotsHtml}</div>
+              </div>
+
+              <h2 class="text-base sm:text-xl font-extrabold text-white leading-relaxed">${currentQ.question}</h2>
+
+              <div class="space-y-3">${optionsHtml}</div>
+
+              ${STATE.testSubmitted ? `
+                <div class="p-4 rounded-2xl bg-slate-950/90 border border-sky-400/30 space-y-1">
+                  <div class="text-xs font-extrabold text-sky-300">الإجابة الصحيحة والتعليل:</div>
+                  <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${currentQ.explanation}</p>
+                </div>
+              ` : ''}
+
+              <div class="pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="jumpToTestQuestion(${STATE.testIndex - 1})" ${STATE.testIndex === 0 ? 'disabled' : ''} class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 disabled:opacity-40 text-slate-200 border border-slate-700">
+                    السابق
+                  </button>
+                  <button type="button" onclick="jumpToTestQuestion(${STATE.testIndex + 1})" ${STATE.testIndex === questions.length - 1 ? 'disabled' : ''} class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 disabled:opacity-40 text-slate-200 border border-slate-700">
+                    التالي
+                  </button>
+                </div>
+                ${!STATE.testSubmitted
+                  ? `<button type="button" onclick="gradeTest()" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-emerald-400 hover:bg-emerald-300 text-slate-950">تصحيح الاختبار</button>`
+                  : `<button type="button" onclick="restartTest()" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-800 hover:bg-slate-700 text-white border border-slate-600">محاولة جديدة</button>`
+                }
+              </div>
+            </div>
+          ` : ''}
+
+          <!-- أعلى الدرجات المحفوظة في localStorage -->
+          <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-3">
+            <h3 class="text-base font-extrabold text-white">أعلى الدرجات المحفوظة</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              ${highScoresSummary}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    /**
+     * صفحة الرسومات التوضيحية التفاعلية بصيغة SVG
+     */
+    function renderFiguresView() {
+      const cardsHtml = FIGURES.map((fig) => `
+        <article class="glass-card rounded-2xl p-5 flex flex-col justify-between gap-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-400/15 text-sky-300 border border-sky-400/25">${fig.chapter}</span>
+              <button type="button" onclick="openFigureModal('${fig.id}')" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-400/15 hover:bg-emerald-400/25 text-emerald-200 border border-emerald-400/35">
+                تكبير المخطط
+              </button>
+            </div>
+            <h2 class="text-sm sm:text-base font-extrabold text-white">${fig.title}</h2>
+            <div class="rounded-xl overflow-hidden cursor-pointer" onclick="openFigureModal('${fig.id}')">
+              ${fig.svg}
+            </div>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed pt-2 border-t border-slate-800/70">${fig.caption}</p>
+        </article>
+      `).join('');
+
+      return `
+        <section class="animate-view space-y-6">
+          <div class="glass-card rounded-3xl p-5 sm:p-7">
+            <h1 class="text-xl sm:text-3xl font-extrabold text-white">الرسومات والمخططات التوضيحية</h1>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1">مخططات SVG تفاعلية عالية الدقة؛ انقر على أي مخطط لتكبيره وعرض شرحه الكامل.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            ${cardsHtml}
+          </div>
+        </section>
+      `;
+    }
+
+    /**
+     * بنك الأسئلة المحلولة المصنفة حسب الفصول مع إمكانية إظهار/إخفاء الحل النموذجي والتعليل
+     */
+    function openQAForChapter(chapterShortTitle) {
+      STATE.qaChapterFilter = chapterShortTitle;
+      navigateTo('qa');
+    }
+
+    function setQAChapter(ch) {
+      STATE.qaChapterFilter = ch;
+      renderCurrentView();
+    }
+
+    function toggleQAAnswer(qaId) {
+      STATE.revealedAnswers[qaId] = !STATE.revealedAnswers[qaId];
+      renderCurrentView();
+    }
+
+    function setAllQARevealed(showAll) {
+      SOLVED_QUESTIONS.forEach((q) => {
+        STATE.revealedAnswers[q.id] = showAll;
+      });
+      renderCurrentView();
+    }
+
+    function renderQAView() {
+      const filters = ['all', 'الفصل الأول', 'الفصل الثاني', 'الفصل الثالث', 'الفصل الرابع', 'الفصل الخامس', 'الفصل السادس'];
+      const filterBtnsHtml = filters.map((ch) => {
+        const active = STATE.qaChapterFilter === ch;
+        return `
+          <button type="button" onclick="setQAChapter('${ch}')" class="px-3 py-2 rounded-xl text-xs font-extrabold ${
+            active
+              ? 'bg-amber-400 text-slate-950'
+              : 'bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-700/80'
+          }">
+            ${ch === 'all' ? 'جميع الفصول' : ch}
+          </button>
+        `;
+      }).join('');
+
+      const list = STATE.qaChapterFilter === 'all'
+        ? SOLVED_QUESTIONS
+        : SOLVED_QUESTIONS.filter((q) => q.chapter === STATE.qaChapterFilter);
+
+      const cardsHtml = list.map((item, idx) => {
+        const isOpen = !!STATE.revealedAnswers[item.id];
+        return `
+          <article class="glass-card rounded-2xl p-5 sm:p-6 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-extrabold flex items-center justify-center">${idx + 1}</span>
+                <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-800 text-sky-300">${item.chapter}</span>
+              </div>
+              <button type="button" onclick="toggleQAAnswer('${item.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-extrabold ${
+                isOpen
+                  ? 'bg-slate-800 text-slate-200 border border-slate-600'
+                  : 'bg-emerald-400 text-slate-950 hover:bg-emerald-300'
+              }">
+                ${isOpen ? 'إخفاء الحل النموذجي' : 'إظهار الحل النموذجي'}
+              </button>
+            </div>
+
+            <h2 class="text-sm sm:text-base font-extrabold text-white leading-relaxed">${item.question}</h2>
+
+            ${isOpen ? `
+              <div class="p-4 rounded-2xl bg-slate-950/85 border border-emerald-500/25 space-y-2 animate-view">
+                <div>
+                  <div class="text-xs font-extrabold text-emerald-300 mb-1">الحل النموذجي:</div>
+                  <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${item.answer}</p>
+                </div>
+                <div class="pt-2 border-t border-slate-800/80">
+                  <div class="text-xs font-extrabold text-sky-300 mb-0.5">التعليل والاستنتاج:</div>
+                  <p class="text-xs text-slate-300 leading-relaxed">${item.rationale}</p>
+                </div>
+              </div>
+            ` : ''}
+          </article>
+        `;
+      }).join('');
+
+      return `
+        <section class="animate-view space-y-6">
+          <div class="glass-card rounded-3xl p-5 sm:p-7 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h1 class="text-xl sm:text-3xl font-extrabold text-white">بنك الأسئلة المحلولة</h1>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1">اختبر نفسك أولاً ثم أظهر الحل النموذجي والتعليل لكل سؤال.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="setAllQARevealed(true)" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-200 border border-emerald-400/35">
+                  إظهار الكل
+                </button>
+                <button type="button" onclick="setAllQARevealed(false)" class="px-3 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700">
+                  إخفاء الكل
+                </button>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              ${filterBtnsHtml}
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            ${cardsHtml}
+          </div>
+        </section>
+      `;
+    }
+
+    /**
+     * صفحة المصادر والمراجع العلمية مع زر نسخ سريع
+     */
+    function handleRefSearch(val) {
+      STATE.refSearch = val;
+      renderCurrentView();
+    }
+
+    function renderReferencesView() {
+      const q = STATE.refSearch.trim().toLowerCase();
+      const filtered = REFERENCES.filter((r) => !q || r.citation.toLowerCase().includes(q) || String(r.num).includes(q));
+
+      const refsHtml = filtered.map((ref) => `
+        <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-xl bg-sky-400/15 text-sky-300 border border-sky-400/30 text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5">${ref.num}</span>
+            <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed" dir="ltr">${ref.citation}</p>
+          </div>
+          <button type="button" onclick="copyTextToClipboard('${ref.citation.replace(/'/g, "\\'")}', 'تم نسخ المصدر رقم ${ref.num}')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-sky-400/15 hover:bg-sky-400/25 text-sky-200 border border-sky-400/35 shrink-0 self-end sm:self-center">
+            نسخ المرجع
+          </button>
+        </div>
+      `).join('');
+
+      return `
+        <section class="animate-view space-y-6">
+          <div class="glass-card rounded-3xl p-5 sm:p-7 space-y-4">
+            <div>
+              <h1 class="text-xl sm:text-3xl font-extrabold text-white">المصادر والمراجع العلمية</h1>
+              <p class="text-xs sm:text-sm text-slate-300 mt-1">المراجع الأكاديمية المعتمدة للمنهج مع إمكانية البحث والنسخ السريع.</p>
+            </div>
+            <input
+              type="search"
+              value="${STATE.refSearch.replace(/"/g, '&quot;')}"
+              oninput="handleRefSearch(this.value)"
+              placeholder="ابحث في المراجع (مثلاً: NIST، Goodfellow، Russell...)"
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-950/90 border border-slate-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+            />
+          </div>
+
+          <div class="space-y-3">
+            ${refsHtml || '<div class="glass-card rounded-2xl p-6 text-center text-sm text-slate-300">لا توجد مراجع مطابقة لبحثك.</div>'}
+          </div>
+        </section>
+      `;
+    }
+
+    /**
+     * تصيير الواجهة الحالية بأمان
+     */
+    function renderCurrentView() {
+      const container = document.getElementById('appContainer');
+      if (!container) return;
+
+      try {
+        stopHeroVisuals();
+        let html = '';
+        if (STATE.currentRoute === 'home') {
+          html = renderHomeView();
+        } else if (STATE.currentRoute === 'chapters') {
+          html = renderChaptersView();
+        } else if (STATE.currentRoute === 'tests') {
+          html = renderTestsView();
+        } else if (STATE.currentRoute === 'figures') {
+          html = renderFiguresView();
+        } else if (STATE.currentRoute === 'qa') {
+          html = renderQAView();
+        } else if (STATE.currentRoute === 'refs') {
+          html = renderReferencesView();
+        } else {
+          html = renderHomeView();
+        }
+
+        container.innerHTML = html;
+        syncActiveNav(STATE.currentRoute);
+
+        if (STATE.currentRoute === 'home') {
+          initHeroInteractiveVisuals();
+        }
+      } catch (err) {
+        container.innerHTML = `
+          <div class="glass-card rounded-2xl p-6 border border-rose-500/40 text-center space-y-3">
+            <h2 class="text-lg font-extrabold text-rose-300">حدث خطأ غير متوقع</h2>
+            <button type="button" onclick="navigateTo('home')" class="px-4 py-2 rounded-xl text-xs font-extrabold bg-sky-400 text-slate-950">العودة للرئيسية</button>
+          </div>
+        `;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHighScores();
+      renderCurrentView();
+    });
+  </script>
+</body>
+</html>
+```
